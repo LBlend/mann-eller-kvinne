@@ -8,7 +8,7 @@ Nettsida gjetter om du er mann eller kvinne ved bruk av enkel maskinlæring.
 Maskinlæringsmodellen er trent på over 3000 anmeldelser fra norsk media og har som formål å finne ut av hva som skiller kvinner og menn skriftlig.
 
 
-Om du mener at denne kan forbedres, kan du gjerne bidra. Kan du react eller har kunnskap om react så er det bare å åpne opp din favoritteditor og hive seg på!
+Om du mener at denne kan forbedres, kan du gjerne bidra. Kan du react eller har kunnskap om maskinlæring så er det bare å åpne opp din favoritteditor og hive seg på!
 Sjekk [bidragsguiden](CONTRIBUTING.md)
 
 
