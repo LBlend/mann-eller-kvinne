@@ -4,6 +4,7 @@
 # Backend
 __pycache__/
 model.pickle
+corpus/
 
 
 # Frontend
