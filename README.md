@@ -25,7 +25,9 @@ Kommer når jeg gidder å dokumentere. Snart™
 
 ## Takk
 
-Takk til LtgOslo som har laget det taggede korpuset, datasettet, som er brukt til å trene maskinlæringsmodellen.
+Takk til [LtgOslo](https://www.mn.uio.no/ifi/english/research/groups/ltg/) som har laget det taggede korpuset, datasettet, som er brukt til å trene maskinlæringsmodellen.
+
+Du kan finne korpuset som er brukt [her](https://github.com/ltgoslo/norec_gender)
 
 ```
 @InProceedings{TouOvrVell20,
