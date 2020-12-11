@@ -1,8 +1,18 @@
 from flask import Flask, request
+from flask_cors import CORS, cross_origin
+
 import classifier
 
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": ["https://mann-eller-kvinne.no", "http://localhost:3000"]}})
+cross_origin(
+    origins=['https://mann-eller-kvinne.no', 'http://localhost:3000'],
+    methods=['GET', 'POST'],
+    always_send=True,
+    automatic_options=True,
+    headers=['Content-Type']
+)
 
 
 @app.route('/')
