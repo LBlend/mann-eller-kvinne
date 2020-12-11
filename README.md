@@ -35,7 +35,7 @@ Du kan finne korpuset som er brukt [her](https://github.com/ltgoslo/norec_gender
   author = {Samia Touileb and Lilja {\O}vrelid and Erik Velldal},
   title = {Gender and sentiment, critics and authors: a dataset of Norwegian book reviews},
   booktitle = {{Proceedings of the 2nd Workshop on Gender Bias in Natural Language Processing}},
-  year = 2020,
+  year = 2020
 }
 ```
 
