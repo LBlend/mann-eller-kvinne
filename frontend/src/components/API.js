@@ -1,4 +1,4 @@
-const api_base_url = "https://api.mann-eller-kvinne.no"
+const api_base_url = "https://genderapi.lblend.moe"
 
 export const predict = async (text) => {
   if (text.length > 5000) {

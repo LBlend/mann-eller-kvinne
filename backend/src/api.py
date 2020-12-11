@@ -5,9 +5,9 @@ import classifier
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["https://mann-eller-kvinne.no", "http://localhost:3000"]}})
+CORS(app, resources={r'/*': {'origins': ['https://genderapi.lblend.moe', 'http://localhost:3000']}})
 cross_origin(
-    origins=['https://mann-eller-kvinne.no', 'http://localhost:3000'],
+    origins=['https://genderapi.lblend.moe', 'http://localhost:3000'],
     methods=['GET', 'POST'],
     always_send=True,
     automatic_options=True,
