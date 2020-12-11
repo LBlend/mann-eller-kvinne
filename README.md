@@ -9,6 +9,7 @@ Maskinlæringsmodellen er trent på over 3000 anmeldelser fra norsk media og har
 
 
 Om du mener at denne kan forbedres, kan du gjerne bidra. Kan du react eller har kunnskap om react så er det bare å åpne opp din favoritteditor og hive seg på!
+Sjekk [bidragsguiden](CONTRIBUTING.md)
 
 
 ## En liten kommentar
