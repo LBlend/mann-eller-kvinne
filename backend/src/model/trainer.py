@@ -5,7 +5,7 @@ import pickle
 
 
 def load_corpus():
-    return nltk.corpus.PlaintextCorpusReader('corpus/NoRec_gender/', '.*\.txt')
+    return nltk.corpus.PlaintextCorpusReader('corpus/NoRec_gender/', r'.*\.txt')
 
 
 def get_text(text, man, woman):

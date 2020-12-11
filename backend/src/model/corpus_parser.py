@@ -6,6 +6,7 @@ from shutil import copy
 corpus_raw_path = './corpus/NoRec_gender_raw'
 corpus_parsed_path = './corpus/NoRec_gender'
 
+
 def init_parsed_corpus():
     try:
         os.mkdir(corpus_parsed_path)
