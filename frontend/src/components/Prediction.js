@@ -38,7 +38,7 @@ function Prediction() {
     <div className='prediction'>
         <textarea onChange={(e) => setText(e.target.value)} />
         <h3>🤖 Maskinen gjetter 🤖</h3>
-        <p>Du er sannsyligvis en <b>{prediction}</b></p>
+        <p>Du er sannsynligvis en <b>{prediction}</b></p>
         <br />
         <p>Sannsynlighet for mann: {man}</p>
         <p>Sannsynlighet for kvinne: {woman}</p>
