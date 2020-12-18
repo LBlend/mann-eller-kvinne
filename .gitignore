@@ -3,7 +3,7 @@
 
 # Backend
 __pycache__/
-model.pickle
+bayes_model.pkl
 corpus/
 
 

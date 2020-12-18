@@ -3,7 +3,7 @@ from model import feature_extractor
 import pickle
 
 
-with open('./model/model.pickle', 'rb') as f:
+with open('./model/bayes_model.pkl', 'rb') as f:
     classifier = pickle.load(f)
 
 
@@ -19,20 +19,22 @@ def predict(text):
         'woman': 'kvinne'
     }
 
-    result['text'] = text
-    result['prediction'] = {}
-
-    result['likelyhood'] = {}
-    result['likelyhood']['raw'] = {}
-    result['likelyhood']['simple'] = {}
-
-    result['prediction']['norwegian'] = norwegian[prediction.max()]
-    result['prediction']['english'] = prediction.max()
-
-    result['likelyhood']['raw']['man'] = prediction.prob('man')
-    result['likelyhood']['raw']['woman'] = prediction.prob('woman')
-
-    result['likelyhood']['simple']['man'] = f'{prediction.prob("man") * 100:.0f}%'
-    result['likelyhood']['simple']['woman'] = f'{prediction.prob("woman") * 100:.0f}%'
+    result = {
+        'text': text,
+        'prediction': {
+            'norwegian': norwegian[prediction.max()],
+            'english': prediction.max()
+        },
+        'likelihood': {
+            'raw': {
+                'man': prediction.prob('man'),
+                'woman': prediction.prob('woman')
+            },
+            'simple': {
+                'man': f'{prediction.prob("man") * 100:.0f}%',
+                'woman': f'{prediction.prob("woman") * 100:.0f}%'
+            }
+        }
+    }
 
     return result
