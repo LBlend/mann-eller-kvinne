@@ -4,7 +4,7 @@
     <img src="https://raw.githubusercontent.com/LBlend/mann-eller-kvinne/main/.static/mann-eller-kvinne.png?token=AF55TQTQ2EPX6JP33MO4NLK73QQZG">
 </div>
 
-Nettsida gjetter om du er mann eller kvinne ved bruk av enkel maskinlæring. 
+Nettsida gjetter om du er mann eller kvinne ved bruk av enkel maskinlæring.
 Maskinlæringsmodellen er trent på over 3000 anmeldelser fra norsk media og har som formål å finne ut av hva som skiller kvinner og menn skriftlig.
 
 
@@ -21,7 +21,30 @@ Man skal dermed ikke ta denne så seriøst. Dette er bare et prosjekt laget for 
 
 ## Kjør selv
 
-Kommer når jeg gidder å dokumentere. Snart™
+0. installer dependencies:
+node.js, npm, python3, pip  
+
+1. kjør build scriptet for backend fra /backend mappen:  
+```console
+sh build_model.sh
+```
+
+2. installer dependencies for frontend
+```console
+npm i
+```
+
+3. kjør backend og frontend
+
+
+```console
+python3 src/api.py
+```
+
+```console
+npm start
+```
+
 
 
 ## Takk
