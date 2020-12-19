@@ -24,28 +24,28 @@ Man skal dermed ikke ta denne så seriøst. Dette er bare et prosjekt laget for 
 0. installer dependeser:  
 `node.js, npm, python3, pip`  
 
+### Backend
 1. kjør build scriptet for backend fra /backend mappen:  
 ```console
 sh build_model.sh
 ```
 
-2. installer dependencies for frontend
-```console
-npm i
-```
-
-3. kjør backend og frontend
-
-
+2. kjør APIet med python
 ```console
 python3 src/api.py
 ```
 
+### Frontend
+1. Installer dependencies for frontend
+```console
+npm i
+```
+
+2. Kjør websiden med node
+
 ```console
 npm start
 ```
-
-
 
 ## Takk
 
