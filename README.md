@@ -21,8 +21,8 @@ Man skal dermed ikke ta denne så seriøst. Dette er bare et prosjekt laget for 
 
 ## Kjør selv
 
-0. installer dependencies:
-node.js, npm, python3, pip  
+0. installer dependeser:  
+`node.js, npm, python3, pip`  
 
 1. kjør build scriptet for backend fra /backend mappen:  
 ```console
