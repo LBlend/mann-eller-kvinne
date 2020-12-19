@@ -3,7 +3,7 @@ from model import feature_extractor
 import pickle
 
 
-with open('./model/bayes_model.pkl', 'rb') as f:
+with open('./src/model/bayes_model.pkl', 'rb') as f:
     classifier = pickle.load(f)
 
 
