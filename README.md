@@ -21,31 +21,22 @@ Man skal dermed ikke ta denne så seriøst. Dette er bare et prosjekt laget for 
 
 ## Kjør selv
 
-0. installer dependeser:  
-`node.js, npm, python3, pip`  
+0. clone repoet og installer dependeser:  
+`node.js, npm, python3, pip`   
 
-### Backend
-1. kjør build scriptet for backend fra /backend mappen:  
-```console
-sh build_model.sh
-```
+#### Backend
+1. kjør build scriptet for backend fra /backend mappen:   
+`sh build_model.sh`  
 
-2. kjør APIet med python
-```console
-python3 src/api.py
-```
+2. kjør API-et med python  
+`python3 src/api.py`  
 
-### Frontend
-1. Installer dependencies for frontend
-```console
-npm i
-```
+#### Frontend
+1. Installer dependencies for frontend  
+`npm i`  
 
-2. Kjør websiden med node
-
-```console
-npm start
-```
+2. Kjør websiden med node  
+`npm start`  
 
 ## Takk
 
