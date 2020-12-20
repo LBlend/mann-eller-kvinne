@@ -3,13 +3,13 @@
 
 # Backend
 __pycache__/
-model.pickle
+bayes_model.pkl
 corpus/
 
 
 # Frontend
 # dependencies
-/node_modules
+node_modules
 /.pnp
 .pnp.js
 
