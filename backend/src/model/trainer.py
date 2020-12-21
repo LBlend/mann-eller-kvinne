@@ -5,7 +5,7 @@ import pickle
 
 
 def load_corpus():
-    return nltk.corpus.PlaintextCorpusReader('corpus/', r'.*\.txt')
+    return nltk.corpus.PlaintextCorpusReader('corpus/data/train', r'.*\.txt')
 
 
 def get_text(text):
