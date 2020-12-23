@@ -16,3 +16,8 @@ All python kode må følge følgende konvesjoner:
 ## Front-end
 
 Snart™
+
+
+## Annet
+
+* Docker-relaterte filer skal bruke doble anførselstegn, altså `"`.
