@@ -6,5 +6,6 @@ if [ ! -d 'corpus' ]; then
 fi
 
 python3 -m pip install -r requirements.txt
+python3 ./nltk_install.py
 python3 ./src/model/corpus_parser.py
 python3 ./src/model/trainer.py
