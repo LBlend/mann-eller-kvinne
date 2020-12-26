@@ -7,6 +7,10 @@
 Nettsida gjetter om du er mann eller kvinne ved bruk av enkel maskinlæring.
 Maskinlæringsmodellen er trent på over 3000 anmeldelser fra norsk media og har som formål å finne ut av hva som skiller kvinner og menn skriftlig.
 
+
+Konseptet er inspirert av debatten som oppstod i Berteheussen-saken, hvor det skal ha blitt diskutert hvorvidt det er en mann som kan ha skrevet trusselbrevene som er omtalt. Dette på grunn av at ordet "tisse" ble brukt fremfor ordet "pisse". Du kan lese mer om saken [her](https://www.nrk.no/kultur/uenige-om-bruken-av-ordet-_tisse_-1.15206839)
+
+
 Om du mener at denne kan forbedres, kan du gjerne bidra. Kan du react eller har kunnskap om maskinlæring så er det bare å åpne opp din favoritteditor og hive seg på!
 Sjekk [bidragsguiden](CONTRIBUTING.md)
 
