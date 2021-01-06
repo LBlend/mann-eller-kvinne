@@ -81,4 +81,4 @@ Du kan finne korpuset som er brukt [her](https://github.com/ltgoslo/norec_gender
 
 ## Lisens
 
-[GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
+[GNU GPLv3](LICENSE)
