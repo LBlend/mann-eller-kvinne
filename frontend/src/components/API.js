@@ -8,7 +8,7 @@ export const predict = async (text) => {
         prediction: {
           norwegian: 'som skriver for lange tekster'
         },
-        likelyhood: {
+        likelihood: {
           simple: {
             man: '0%',
             woman: '0%'

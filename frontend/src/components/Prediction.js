@@ -11,8 +11,8 @@ function Prediction() {
   useEffect(() => {
     predict(text).then((result) => {
       setPrediction(result.prediction.norwegian);
-      setMan(result.likelyhood.simple.man);
-      setWoman(result.likelyhood.simple.woman);
+      setMan(result.likelihood.simple.man);
+      setWoman(result.likelihood.simple.woman);
     });
   }, [text]);
 
