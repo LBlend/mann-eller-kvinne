@@ -65,4 +65,4 @@ def train(path):
 
 
 if __name__ == '__main__':
-    train('rnn')
+    train('bin/rnn')
