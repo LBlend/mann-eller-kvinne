@@ -1,7 +1,6 @@
 import tensorflow as tf
 from tensorflow import keras
 import numpy as np
-import tensorflow_datasets as tfds
 
 train_dir = 'corpus/data/train'
 dev_dir = 'corpus/data/dev'
@@ -21,20 +20,15 @@ def load_datasets():
         dev_dir,
         batch_size=batch_size)
 
-    test = keras.preprocessing.text_dataset_from_directory(
-        test_dir,
-        batch_size=batch_size)
-
-    return train, dev, test
+    return train, dev
 
 
-def get_model():
+def get_model(train_set):
     encoder = keras.layers.experimental.preprocessing.TextVectorization(
         max_tokens=VOCAB_SIZE)
 
-    encoder.adapt(raw_train_ds.map(lambda text, label: text))
+    encoder.adapt(train_set.map(lambda text, label: text))
 
-    model = get_model()
     model = tf.keras.Sequential([
         encoder,
         tf.keras.layers.Embedding(
@@ -57,9 +51,9 @@ def train(path):
     # Set global seed for reproducibility
     tf.random.set_seed(seed)
 
-    raw_train_ds, raw_dev_ds, raw_test_ds = load_datasets()
+    raw_train_ds, raw_dev_ds = load_datasets()
 
-    model = get_model()
+    model = get_model(raw_train_ds)
 
     history = model.fit(raw_train_ds, epochs=10,
                         validation_data=raw_dev_ds,
