@@ -1,14 +1,12 @@
-FROM python:3.9.1-alpine3.12
+FROM ubuntu:20.04
 
 WORKDIR /app
 
 COPY . ./
 
-RUN \
-    apk add --no-cache --virtual=build-dependencies  --update gcc musl-dev python3-dev linux-headers && \
-    apk add --no-cache --virtual=runtime --update git
+RUN apt-get update && apt-get install -y build-essential git python3 python3-pip
 
-RUN sh build_model.sh
+RUN sh build_backend.sh
 
 ENV PORT=5000
 

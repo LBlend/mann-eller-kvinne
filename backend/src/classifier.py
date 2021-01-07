@@ -1,40 +1,40 @@
+import numpy as np
+from tensorflow import keras
 import nltk
-from model import feature_extractor
 import pickle
 
+from scripts import train_bayes
 
-with open('./src/model/bayes_model.pkl', 'rb') as f:
-    classifier = pickle.load(f)
+with open('bin/bayes_model.pkl', 'rb') as f:
+    bayes_model = pickle.load(f)
+
+rnn_model = keras.models.load_model('bin/rnn')
 
 
-def predict(text):
-    result = {}
-
+def predict_bayes(text):
     text_tokens = nltk.tokenize.word_tokenize(text)
-    text_features = feature_extractor.bigrams_stopwords(text_tokens)
-    prediction = classifier.prob_classify(text_features)
+    text_features = train_bayes.preprocess(text_tokens)
+    dist = bayes_model.prob_classify(text_features)
+    return {'M': dist.prob('man'), 'F': dist.prob('woman')}
 
-    norwegian = {
-        'man': 'mann',
-        'woman': 'kvinne'
-    }
 
-    result = {
+def predict_rnn(text):
+    pred_arr = rnn_model.predict(np.array([text]))
+    pred = float(pred_arr[0, 0])
+    # F = 0, M = 1, P(!A) == 1 - P(A)
+    return {'M': pred, 'F': 1 - pred}
+
+
+pred_funcs = {
+    'bayes': predict_bayes,
+    'rnn': predict_rnn
+}
+
+
+def predict(text, clf='bayes'):
+    predict_proba = pred_funcs[clf]
+    return {
         'text': text,
-        'prediction': {
-            'norwegian': norwegian[prediction.max()],
-            'english': prediction.max()
-        },
-        'likelihood': {
-            'raw': {
-                'man': prediction.prob('man'),
-                'woman': prediction.prob('woman')
-            },
-            'simple': {
-                'man': f'{prediction.prob("man") * 100:.0f}%',
-                'woman': f'{prediction.prob("woman") * 100:.0f}%'
-            }
-        }
+        'clf': clf,
+        'probability': predict_proba(text)
     }
-
-    return result

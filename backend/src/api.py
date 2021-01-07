@@ -22,13 +22,27 @@ def home():
 
 @app.route('/mann-eller-kvinne', methods=['POST'])
 def mann_eller_kvinne():
+    '''
+    Input fields:
+        text: str | input data for classifier
+        clf: str | which classifier to use, default: bayes
+
+    Output fields:
+        clf: str
+        probs: JSON
+            M: float | estimated probability for the male class
+            F: float | estimated probability for the female class
+    '''
     data = request.get_json()
-    print(data)
+    print('Received', data)
     text = data['text']
     if not text:
         return 'Du må gi meg noe tekst da idiot!'
 
-    return classifier.predict(text)
+    clf = data.get('clf', 'bayes')
+    response = classifier.predict(text, clf)
+    print('Responding with', response)
+    return response
 
 
 if __name__ == '__main__':
