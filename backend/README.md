@@ -1,6 +1,6 @@
 # Mann-eller-kvinne - API  
 
-API-et kjører på flask og er http grensesnittet til klassifikatorene.  
+API-et kjører på Flask og er HTTP-grensesnittet til klassifikatorene.  
 
 
 ## Classifiers  
