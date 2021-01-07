@@ -8,7 +8,7 @@ RUN \
     apk add --no-cache --virtual=build-dependencies  --update gcc musl-dev python3-dev linux-headers && \
     apk add --no-cache --virtual=runtime --update git
 
-RUN sh build_model.sh
+RUN sh build_backend.sh
 
 ENV PORT=5000
 
