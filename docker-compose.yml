@@ -1,0 +1,14 @@
+version: "3"
+
+services: 
+  backend:
+    container_name: backend_mann-eller-kvinne
+    build: "./backend"
+    ports: 
+      - "5000:5000"
+
+  frontend:
+    container_name: frontend_mann-eller-kvinne
+    build: "./frontend"
+    ports: 
+      - "3000:3000"

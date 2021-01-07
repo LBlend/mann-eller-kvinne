@@ -27,7 +27,6 @@ export const predict = async (text) => {
     },
     body: JSON.stringify(data)
   });
-  let response = await rawResponse.json();
-  console.log(response)
+  const response = await rawResponse.json();
   return response;
 }

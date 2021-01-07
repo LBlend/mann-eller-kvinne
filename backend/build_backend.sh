@@ -8,6 +8,8 @@ if [ ! -d 'corpus' ]; then
     python3 ./src/scripts/clean_data.py
 fi
 
+python3 nltk_install.py
+
 if [ ! -e 'bin/bayes_model.pkl' ]; then
     python3 ./src/scripts/train_bayes.py
 fi
