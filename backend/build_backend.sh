@@ -9,7 +9,7 @@ if [ ! -d 'corpus' ]; then
     python3 ./src/scripts/clean_data.py
 fi
 
-python3 -c "import nltk; nltk.download('stopwords'); nltk.download('punkt')"
+python3 -c "import nltk; nltk.download('stopwords')"
 
 if [ ! -e 'bin/bayes_model.pkl' ]; then
     python3 ./src/scripts/train_bayes.py
