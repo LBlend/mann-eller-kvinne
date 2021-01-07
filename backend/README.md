@@ -12,6 +12,6 @@ Den er enkel på den måten at den ikke egentlig bryr seg om ordsekvenser, men h
 
 ### Recurrent Neural Network  
 
-Modellarkitekturen er inspirert av https://www.tensorflow.org/tutorials/text/text_classification_rnn
+Modellarkitekturen er inspirert av [denne guiden](https://www.tensorflow.org/tutorials/text/text_classification_rnn)
 
 <img src="https://www.tensorflow.org/tutorials/text/images/bidirectional.png" />
