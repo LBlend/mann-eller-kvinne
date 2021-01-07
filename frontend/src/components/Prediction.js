@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 import { predict } from '../components/API';
 
+function toPercent(n) {
+  return `${Math.round(n * 100)}%`
+}
+
 function Prediction() {
   const [text, setText] = useState('');
   const [prediction, setPrediction] = useState('');
@@ -10,9 +14,9 @@ function Prediction() {
 
   useEffect(() => {
     predict(text).then((result) => {
-      setPrediction(result.prediction.norwegian);
-      setMan(result.likelyhood.simple.man);
-      setWoman(result.likelyhood.simple.woman);
+      setPrediction(result.probability['M'] > result.probability['F'] ? 'mann' : 'kvinne');
+      setMan(toPercent(result.probability['M']));
+      setWoman(toPercent(result.probability['F']));
     });
   }, [text]);
 

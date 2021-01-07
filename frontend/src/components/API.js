@@ -1,23 +1,24 @@
-const api_base_url = "https://genderapi.lblend.moe"
+// const api_base_url = "https://genderapi.lblend.moe"
+const api_base_url = "http://127.0.0.1:5000"
 
 export const predict = async (text) => {
   if (text.length > 5000) {
     document.body.style.backgroundColor = '#171520';
     return (
       {
-        prediction: {
-          norwegian: 'som skriver for lange tekster'
+        probability: {
+          'M': 0,
+          'F': 0
         },
-        likelyhood: {
-          simple: {
-            man: '0%',
-            woman: '0%'
-          }
-        }
       }
     )
   }
-  let data = {text: text}
+
+  let data = {
+    text: text,
+    clf: 'bayes'
+    // clf: 'rnn'
+  }
   console.log(data)
   const rawResponse = await fetch(`${api_base_url}/mann-eller-kvinne`, {
     method: 'POST',
@@ -27,5 +28,6 @@ export const predict = async (text) => {
     body: JSON.stringify(data)
   });
   let response = await rawResponse.json();
+  console.log(response)
   return response;
 }
