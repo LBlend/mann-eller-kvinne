@@ -2,12 +2,13 @@ import json
 import os
 import shutil
 from tqdm import tqdm
-from collections import Counter
+# from collections import Counter
 
 corpus_data = './corpus/data'
 
 classes = []
 splits = ('train', 'dev', 'test')
+
 
 def main():
     with open(f'{corpus_data}/metadata_norec_gender.json', 'r', encoding='utf-8') as f:
@@ -34,6 +35,7 @@ def main():
             shutil.move(f'{corpus_data}/{split}/{entry}.txt', f'{corpus_data}/{split}/{gender}/{entry}.txt')
         except FileNotFoundError as e:
             print(e)
+
 
 if __name__ == '__main__':
     main()

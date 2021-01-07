@@ -5,6 +5,7 @@ from string import punctuation
 
 stopwords = nltk.corpus.stopwords.words('norwegian')
 
+
 def preprocess(tokens, trigrams=False, use_stopwords=False):
     normalized = (token.lower() for token in tokens if token not in punctuation)
 
@@ -13,10 +14,11 @@ def preprocess(tokens, trigrams=False, use_stopwords=False):
 
     lowered = list(normalized)
     # Make iterator over all elements
-    token_iter = itertools.chain(((w,) for w in lowered),
-                               nltk.bigrams(lowered),
-                               nltk.trigrams(lowered) if trigrams else []
-                               )
+    token_iter = itertools.chain(
+        ((w,) for w in lowered),
+        nltk.bigrams(lowered),
+        nltk.trigrams(lowered) if trigrams else []
+    )
 
     return {token: True for token in token_iter}
 
@@ -56,6 +58,7 @@ def train(path):
     save_model(classifier, path)
 
     return classifier
+
 
 if __name__ == '__main__':
     train('bin/bayes_model.pkl')

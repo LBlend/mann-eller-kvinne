@@ -1,6 +1,7 @@
+# import numpy as np
 import tensorflow as tf
 from tensorflow import keras
-import numpy as np
+
 
 train_dir = 'corpus/data/train'
 dev_dir = 'corpus/data/dev'
@@ -10,6 +11,7 @@ batch_size = 32
 buffer_size = 10000
 seed = 42
 VOCAB_SIZE = 1000
+
 
 def load_datasets():
     train = keras.preprocessing.text_dataset_from_directory(
@@ -55,9 +57,13 @@ def train(path):
 
     model = get_model(raw_train_ds)
 
-    history = model.fit(raw_train_ds, epochs=10,
-                        validation_data=raw_dev_ds,
-                        validation_steps=10)
+    # history =
+    model.fit(
+        raw_train_ds,
+        epochs=10,
+        validation_data=raw_dev_ds,
+        validation_steps=10
+    )
 
     model.save(path)
 
