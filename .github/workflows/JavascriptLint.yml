@@ -15,7 +15,7 @@ jobs:
           node-version: '14'
 
       - name: Install npm packages
-        run: npm install standard --global
+        run: npm install standard
 
       - name: Run standardJS
         run: npx standard "./frontend/src/**/*.js"
