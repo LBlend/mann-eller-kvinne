@@ -20,7 +20,7 @@ export const predict = async (text) => {
     // clf: 'rnn'
   }
   console.log(data)
-  const rawResponse = await fetch(`${apiBaseUrl}/mann-eller-kvinne`, {
+  const rawResponse = await fetch(`${apiBaseUrl}/mann-eller-kvinne`, { // eslint-disable-line no-undef
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
