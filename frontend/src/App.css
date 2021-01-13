@@ -25,11 +25,13 @@ main {
 article {
   flex-direction: column;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 60vw; /* change to 60ch in the future */
+  width: 60vw;
+  max-width: 1024px;
   margin-left: auto;
   margin-right: auto;
+}
+article > h1 {
+  text-align: center;
 }
 article > * {
   margin-top: 1rem;
