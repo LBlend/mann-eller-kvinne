@@ -33,6 +33,10 @@ article {
 article > h1 {
   text-align: center;
 }
+article > img {
+  margin: auto;
+  max-width: 60vw;
+}
 article > * {
   margin-top: 1rem;
   margin-bottom: 1rem;
