@@ -1,7 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-function Home() {
-
+function Home () {
   return (
     <div>
       <nav>
@@ -10,14 +9,14 @@ function Home() {
       <main>
         <h1>🤵 Mann eller Kvinne? 💃</h1>
         <p>Skriv og la maskinen gjette om du er mann eller kvinne</p>
-        <textarea></textarea>
+        <textarea />
         <div className='prediction'>
           <h3>🤖 Maskinen gjetter 🤖</h3>
-          <p></p>
+          <p />
         </div>
       </main>
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home

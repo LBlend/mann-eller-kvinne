@@ -1,13 +1,13 @@
-import React from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import './App.css'
 
-import Home from './pages/Home';
-import About from './pages/About';
-import Footer from './components/Footer';
+import Home from './pages/Home'
+import About from './pages/About'
+import Footer from './components/Footer'
 
-function App() {
+function App () {
   return (
     <Router>
       <Switch>
@@ -16,7 +16,7 @@ function App() {
       </Switch>
       <Footer />
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

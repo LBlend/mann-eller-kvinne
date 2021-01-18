@@ -15,7 +15,7 @@ All python kode må følge følgende konvesjoner:
 
 ## Front-end
 
-Snart™
+* Følg [standardJS](https://standardjs.com/) sine konvensjoner.
 
 
 ## Annet
