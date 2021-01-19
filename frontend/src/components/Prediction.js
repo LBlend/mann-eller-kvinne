@@ -25,14 +25,13 @@ function Prediction () {
     document.body.style.backgroundColor = '#171520'
     return (
       <div className='prediction'>
-        
         <textarea onChange={(e) => setText(e.target.value)} />
         <div className='toggleContainer'>
           <h4>Select model</h4>
           <p title='Naive Bayes'>Bayes</p>
           <label className='toggle'>
             <input type='checkbox' checked={toggle} onChange={(i) => setToggle(i.target.checked)} />
-            <span className='slider'></span>
+            <span className='slider' />
           </label>
           <p title='Recurrent Neural Network'>RNN</p>
         </div>
@@ -55,7 +54,7 @@ function Prediction () {
         <p title='Naive Bayes'>Bayes</p>
         <label className='toggle'>
           <input type='checkbox' checked={toggle} onChange={(i) => setToggle(i.target.checked)} />
-          <span className='slider'></span>
+          <span className='slider' />
         </label>
         <p title='Recurrent Neural Network'>RNN</p>
       </div>
