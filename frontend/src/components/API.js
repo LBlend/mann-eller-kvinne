@@ -1,7 +1,7 @@
 const apiBaseUrl = 'https://genderapi.lblend.moe'
 // const apiBaseUrl = 'http://127.0.0.1:5000'
 
-export const predict = async (text) => {
+export const predict = async (text, toggle) => {
   if (text.length > 5000) {
     document.body.style.backgroundColor = '#171520'
     return (
@@ -16,8 +16,7 @@ export const predict = async (text) => {
 
   const data = {
     text: text,
-    clf: 'bayes'
-    // clf: 'rnn'
+    clf: (toggle) ? 'rnn' : 'bayes'
   }
   console.log(data)
   const rawResponse = await fetch(`${apiBaseUrl}/mann-eller-kvinne`, { // eslint-disable-line no-undef

@@ -11,20 +11,31 @@ function Prediction () {
   const [prediction, setPrediction] = useState('')
   const [man, setMan] = useState('')
   const [woman, setWoman] = useState('')
+  const [toggle, setToggle] = useState(false)
 
   useEffect(() => {
-    predict(text).then((result) => {
+    predict(text, toggle).then((result) => {
       setPrediction(result.probability.M > result.probability.F ? 'mann' : 'kvinne')
       setMan(toPercent(result.probability.M))
       setWoman(toPercent(result.probability.F))
     })
-  }, [text])
+  }, [text, toggle])
 
   if (text === '') {
     document.body.style.backgroundColor = '#171520'
     return (
       <div className='prediction'>
+        
         <textarea onChange={(e) => setText(e.target.value)} />
+        <div className='toggleContainer'>
+          <h4>Select model</h4>
+          <p title='Naive Bayes'>Bayes</p>
+          <label className='toggle'>
+            <input type='checkbox' checked={toggle} onChange={(i) => setToggle(i.target.checked)} />
+            <span className='slider'></span>
+          </label>
+          <p title='Recurrent Neural Network'>RNN</p>
+        </div>
         <h3>🤖 Maskinen gjetter 🤖</h3>
         <p>ingenting... <i>foreløpig</i> 👀</p>
       </div>
@@ -40,6 +51,14 @@ function Prediction () {
   return (
     <div className='prediction'>
       <textarea onChange={(e) => setText(e.target.value)} />
+      <div className='toggleContainer'>
+        <p title='Naive Bayes'>Bayes</p>
+        <label className='toggle'>
+          <input type='checkbox' checked={toggle} onChange={(i) => setToggle(i.target.checked)} />
+          <span className='slider'></span>
+        </label>
+        <p title='Recurrent Neural Network'>RNN</p>
+      </div>
       <h3>🤖 Maskinen gjetter 🤖</h3>
       <p>Du er sannsynligvis en <b>{prediction}</b></p>
       <br />
