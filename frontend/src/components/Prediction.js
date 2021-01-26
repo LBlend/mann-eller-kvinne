@@ -22,7 +22,6 @@ function Prediction () {
   }, [text, toggle])
 
   if (text === '') {
-    document.body.style.backgroundColor = '#171520'
     return (
       <div className='prediction'>
         <textarea onChange={(e) => setText(e.target.value)} />
@@ -45,6 +44,8 @@ function Prediction () {
     document.body.style.backgroundColor = '#2C77FF'
   } else if (prediction === 'kvinne') {
     document.body.style.backgroundColor = 'lightcoral'
+  } else {
+    document.body.style.backgroundColor = '#171520'
   }
 
   return (
