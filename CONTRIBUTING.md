@@ -1,5 +1,7 @@
 # Bidragsguide
 
+[English](CONTRIBUTING-en.md)
+
 ## Generelt
 
 Snart™
