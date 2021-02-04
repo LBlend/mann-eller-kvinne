@@ -18,7 +18,6 @@ export const predict = async (text, toggle) => {
     text: text,
     clf: (toggle) ? 'rnn' : 'bayes'
   }
-  console.log(data)
   const rawResponse = await fetch(`${apiBaseUrl}/mann-eller-kvinne`, { // eslint-disable-line no-undef
     method: 'POST',
     headers: {
