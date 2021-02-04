@@ -2,7 +2,7 @@ const apiBaseUrl = 'https://genderapi.lblend.moe'
 // const apiBaseUrl = 'http://127.0.0.1:5000'
 
 export const predict = async (text, toggle) => {
-  if (text.length > 5000) {
+  if (text.length > 50000) {
     document.body.style.backgroundColor = '#171520'
     return (
       {
