@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { predict } from '../components/API'
+import { predict } from '../api/API'
 
 function toPercent (n) {
   return `${Math.round(n * 100)}%`
