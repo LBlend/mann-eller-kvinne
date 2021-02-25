@@ -1,5 +1,7 @@
 # Mann-eller-kvinne - API  
 
+[English](README-en.md)
+
 API-et kjører på Flask og er HTTP-grensesnittet til klassifikatorene.  
 
 

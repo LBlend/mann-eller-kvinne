@@ -2,6 +2,7 @@
     <h1>🤵 Mann eller Kvinne? 💃</h1>
     <p>En nettside som gjetter om du er mann eller kvinne basert på hva du skriver</p>
     <img src="https://raw.githubusercontent.com/LBlend/mann-eller-kvinne/main/.static/mann-eller-kvinne.png?token=AF55TQTQ2EPX6JP33MO4NLK73QQZG">
+    <a href="README-en.md">English</a>
 </div>
 
 Nettsida gjetter om du er mann eller kvinne ved bruk av enkel maskinlæring.

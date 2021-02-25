@@ -1,9 +1,12 @@
 import numpy as np
-from tensorflow import keras
 import nltk
 import pickle
-
+import os
 from scripts import train_bayes
+# SUPPRESS WARNINGS
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+from tensorflow import keras  # noqa: E402
+
 
 with open('bin/bayes_model.pkl', 'rb') as f:
     bayes_model = pickle.load(f)
