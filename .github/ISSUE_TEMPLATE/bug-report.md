@@ -1,22 +1,15 @@
----
-name: Bug report
-about: Om du vil melde inn en feil
-title: ''
-labels: bug
-assignees: LBlend
+## Hva er galt?
+Forklar hva som skjer. Inkluder gjerne bilder/videoer
 
----
 
-**Hva er galt? Gjerne inkluder bilder/videoer**
-A clear and concise description of what the bug is.
+## Hvordan oppstår feilen?
+Forklar hvordan man kan reprodusere feilen.
 
-**Hvordan oppstår feilen?**
-
-**Systeminfo**
+## Systeminfo
  - Enhet: 
  - Operativsystem:
  - Nettleser (med versjonnummer):
 - Tidspunkt:
 
-**Annet**
+## Annet
 Skriv hva enn du føler er relevant her.
