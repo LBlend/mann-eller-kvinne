@@ -1,5 +1,5 @@
 tdqm
-numpy
+numpy==1.19.5
 nltk
 flask
 flask_cors
