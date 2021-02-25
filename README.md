@@ -28,7 +28,9 @@ Man skal dermed ikke ta denne så seriøst. Dette er bare et prosjekt laget for 
 
 Det er ulike måter å gå fram på her, men det anbefales å bruke docker-compose
 
-`docker-compose up`
+```
+docker-compose up
+```
 
 </details>
 
@@ -45,18 +47,26 @@ Det er ulike måter å gå fram på her, men det anbefales å bruke docker-compo
 #### Backend
 
 1. Kjør build-scriptet for backend fra /backend mappa
-   `sh build_model.sh`
+   ```
+   sh build_model.sh
+   ```
 
 2. Kjør API-et med Python
-   `python3 src/api.py`
+   ```
+   python3 src/api.py
+   ```
 
 #### Frontend
 
 1. Installer avhengigheter for frontend  
-   `npm i`
+   ```
+   npm i
+   ```
 
 2. Kjør websiden med Node
-   `npm start`
+   ```
+   npm start
+   ```
 
 </details>
 
