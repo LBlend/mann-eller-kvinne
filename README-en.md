@@ -14,8 +14,8 @@ Before contributing though, check out the [contribution guide](CONTRIBUTING-en.m
 
 ## A quick note
 
-This website was made to discover the difference between men and women in their writing.
-It should be noted though that the models that are used to make predictions is not optimized and is trained on a fairly small dataset.
+This website's purpose is to discover the difference between men and women in their writing.
+It should be noted though that the models that are used to make predictions are not optimized and are trained on a fairly small dataset.
 In other words, you should think critically about the results. This project's is not meant for any serious purpose or reasearch.
 
 ## Installation
