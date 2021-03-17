@@ -2,7 +2,6 @@ import json
 import os
 import shutil
 from tqdm import tqdm
-from contexlib import suppress
 # from collections import Counter
 
 corpus_data = './corpus/data'
@@ -25,8 +24,11 @@ def main():
         split = content['split']
         if gender not in classes:
             for s in splits:
-                with suppress(FileExistsError):
+                try:
                     os.mkdir(f'{corpus_data}/{s}/{gender}')
+                except FileExistsError:
+                    pass
+
                 classes.append(gender)
 
         try:
