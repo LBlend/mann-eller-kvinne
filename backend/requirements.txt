@@ -4,3 +4,4 @@ nltk
 flask
 flask_cors
 tensorflow>=2
+sklearn
