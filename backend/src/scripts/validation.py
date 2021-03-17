@@ -1,4 +1,3 @@
-import tensorflow as tf
 from tensorflow import keras
 from sklearn.metrics import classification_report
 import nltk
