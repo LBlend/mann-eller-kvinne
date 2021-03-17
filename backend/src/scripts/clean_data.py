@@ -1,6 +1,5 @@
 import os
 import shutil
-from contexlib import suppress
 
 data_path = './corpus/data'
 
@@ -10,8 +9,10 @@ new_dir = f'{data_path}/ETC'
 
 
 def move_etc_data():
-    with suppress(FileExistsError):
+    try:
         os.mkdir(new_dir)
+    except FileExistsError:
+        pass
 
     for s in splits:
         cur_path = f'{data_path}/{s}'
