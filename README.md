@@ -53,7 +53,7 @@ docker-compose up
    sh build_model.sh
    ```
 
-2. Endre navnet på [.env.example](backend/.env.example) til `.env` og legg inn erstatt verdiene med dine egne
+2. Endre navnet på [.env.example](backend/.env.example) til `.env` og erstatt verdiene med dine egne
 
 3. Kjør API-et med Python
    ```
@@ -67,7 +67,7 @@ docker-compose up
    npm i
    ```
 
-2. Endre navnet på [.env.example](frontend/.env.example) til `.env` og legg inn erstatt verdiene med dine egne
+2. Endre navnet på [.env.example](frontend/.env.example) til `.env` og erstatt verdiene med dine egne
 
 3. Kjør websiden med Node
    ```
