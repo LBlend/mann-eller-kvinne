@@ -22,10 +22,17 @@ In other words, you should think critically about the results. This project's is
 
 <details>
   <summary>Docker</summary>
+    
+1. Rename the `.env.example` files in the [frontend] and [backend](backend) folder to `.env` and replace the values within them with your own.
 
-We recommend using docker-compose
+#### ⚠️ Regarding ports ⚠️
+It is important that the port numbers within the `.env` file, the [docker-compose.yml](docker-compose.yml) file and `dockerfile` files comply with each other. If you don't know what you're doing we recommend that you stay away from changing anything regarding ports. This is a tedious way of doing things but we are looking to improve this process in the futere and make it easier to change ports when using Docker.
 
-`docker-compose up`
+2. Build the Docker images and run them. We recommend using docker-compose
+
+```
+docker-compose up
+```
 
 </details>
 
