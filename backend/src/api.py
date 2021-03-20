@@ -13,9 +13,9 @@ port = getenv('PORT')
 
 
 app = Flask(__name__)
-CORS(app, resources={r'/*': {'origins': [frontend_url, 'http://localhost:3000']}})
+CORS(app, resources={r'/*': {'origins': [frontend_url, f'http://localhost:{port}']}})
 cross_origin(
-    origins=[frontend_url, 'http://localhost:3000'],
+    origins=[frontend_url, f'http://localhost:{port}'],
     methods=['GET', 'POST'],
     always_send=True,
     automatic_options=True,
