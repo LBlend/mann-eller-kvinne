@@ -28,7 +28,7 @@ Man skal dermed ikke ta denne så seriøst. Dette er bare et prosjekt laget for 
 <details>
   <summary>Docker</summary>
     
-1. Gjør om navnet på `.env.example` filene i [frontend]- og [backend](backend) mappa til `.env` og erstatt verdiene med dine egne
+1. Gjør om navnet på `.env.example` filene i [frontend](frontend)- og [backend](backend) mappa til `.env` og erstatt verdiene med dine egne
 
 #### ⚠️ Angående porter ⚠️
 For å unngå problemer er det viktig at portene i `.env` filene, [docker-compose.yml](docker-compose.yml) filen og `dockerfile` i både frontend og backend samsvarer. Hvis du ikke vet hva du skal gjøre, unngå å endre porter om mulig. Dette er en rar løsning, men vi vil forbedre spesifisering av porter for Docker i fremtiden.
