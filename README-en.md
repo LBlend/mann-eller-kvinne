@@ -51,7 +51,7 @@ docker-compose up
 1. Run the backend build script from the /backend folder
    `sh build_model.sh`
 
-2. Change the name of the file [.env.example] to `.env` og replace the values within it with your own
+2. Change the name of the file [.env.example](backend/.env.example) to `.env` og replace the values within it with your own
 
 3. Run the API with Python
    `python3 src/api.py`
@@ -61,7 +61,7 @@ docker-compose up
 1. Install frontend dependencies  
    `npm i`
 
-2. Change the name of the file [.env.example] to `.env` og replace the values within it with your own
+2. Change the name of the file [.env.example](frontend/.env.example) to `.env` og replace the values within it with your own
 
 3. Run the website with Node
    `npm start`
