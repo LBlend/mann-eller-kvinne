@@ -3,11 +3,19 @@ from flask_cors import CORS, cross_origin
 
 import classifier
 
+from dotenv import load_dotenv
+from os import getenv
+
+
+load_dotenv()
+frontend_url = getenv('FRONTEND_URL')
+port = getenv('PORT')
+
 
 app = Flask(__name__)
-CORS(app, resources={r'/*': {'origins': ['https://mannellerkvinne.lblend.moe', 'http://localhost:3000']}})
+CORS(app, resources={r'/*': {'origins': [frontend_url, f'http://localhost:{port}']}})
 cross_origin(
-    origins=['https://mannellerkvinne.lblend.moe', 'http://localhost:3000'],
+    origins=[frontend_url, f'http://localhost:{port}'],
     methods=['GET', 'POST'],
     always_send=True,
     automatic_options=True,
@@ -46,4 +54,4 @@ def mann_eller_kvinne():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=port)
