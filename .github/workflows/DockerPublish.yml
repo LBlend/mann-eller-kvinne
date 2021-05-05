@@ -1,0 +1,52 @@
+name: Publish Docker images
+on:
+  release:
+    types: [published]
+jobs:
+  push_to_registry:
+    name: Push Docker image to GitHub Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GH_DOCKER }}
+
+      - name: Build and push frontend
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          file: ./frontend/Dockerfile
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}/tree/main/frontend
+            org.opencontainers.image.authors=${{ github.actor }}
+            org.opencontainers.image.url=https://github.com/${{ github.repository }}
+            org.opencontainers.image.documentation=https://github.com/${{ github.repository }}/blob/main/README.md
+            org.opencontainers.image.version=${{ github.event.release.tag_name }}
+            org.opencontainers.image.vendor=${{ github.actor }}
+            org.opencontainers.image.title=mann-eller-kvinne frontend
+            org.opencontainers.image.description=Frontend for mann-eller-kvinne
+          tags: |
+            ghcr.io/lblend/mann-eller-kvinne:frontend-${{ github.event.release.tag_name }}
+
+      - name: Build and push backend
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          file: ./backend/Dockerfile
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}/tree/main/backend
+            org.opencontainers.image.authors=${{ github.actor }}
+            org.opencontainers.image.url=https://github.com/${{ github.repository }}
+            org.opencontainers.image.documentation=https://github.com/${{ github.repository }}/blob/main/README.md
+            org.opencontainers.image.version=${{ github.event.release.tag_name }}
+            org.opencontainers.image.vendor=${{ github.actor }}
+            org.opencontainers.image.title=mann-eller-kvinne backend
+            org.opencontainers.image.description=Backend for mann-eller-kvinne
+          tags: |
+            ghcr.io/lblend/mann-eller-kvinne:backend-${{ github.event.release.tag_name }}
