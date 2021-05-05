@@ -22,10 +22,17 @@ In other words, you should think critically about the results. This project's is
 
 <details>
   <summary>Docker</summary>
+    
+1. Rename the `.env.example` files in the [frontend](frontend) and [backend](backend) folder to `.env` and replace the values within them with your own.
 
-We recommend using docker-compose
+#### ⚠️ Regarding ports ⚠️
+It is important that the port numbers within the `.env` file, the [docker-compose.yml](docker-compose.yml) file and `dockerfile` files comply with each other. If you don't know what you're doing we recommend that you stay away from changing anything regarding ports. This is a tedious way of doing things but we are looking to improve this process in the future and make it easier to change ports when using Docker.
 
-`docker-compose up`
+2. Build the Docker images and run them. We recommend using docker-compose
+
+```
+docker-compose up
+```
 
 </details>
 
@@ -44,7 +51,9 @@ We recommend using docker-compose
 1. Run the backend build script from the /backend folder
    `sh build_model.sh`
 
-2. Run the API with Python
+2. Change the name of the file [.env.example](backend/.env.example) to `.env` og replace the values within it with your own
+
+3. Run the API with Python
    `python3 src/api.py`
 
 #### Frontend
@@ -52,7 +61,9 @@ We recommend using docker-compose
 1. Install frontend dependencies  
    `npm i`
 
-2. Run the website with Node
+2. Change the name of the file [.env.example](frontend/.env.example) to `.env` og replace the values within it with your own
+
+3. Run the website with Node
    `npm start`
 
 </details>

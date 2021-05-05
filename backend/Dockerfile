@@ -10,6 +10,6 @@ RUN sh build_backend.sh
 
 ENV PORT=5000
 
-EXPOSE 3000
+EXPOSE 5000
 
 CMD ["python3", "./src/api.py"]

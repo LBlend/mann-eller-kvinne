@@ -27,8 +27,13 @@ Man skal dermed ikke ta denne så seriøst. Dette er bare et prosjekt laget for 
 
 <details>
   <summary>Docker</summary>
+    
+1. Gjør om navnet på `.env.example` filene i [frontend](frontend)- og [backend](backend)mappa til `.env` og erstatt verdiene med dine egne
 
-Det er ulike måter å gå fram på her, men det anbefales å bruke docker-compose
+#### ⚠️ Angående porter ⚠️
+For å unngå problemer er det viktig at portene i `.env` filene, [docker-compose.yml](docker-compose.yml) filen og `dockerfile` i både frontend og backend samsvarer. Unngå å endre porter om du ikke vet hva du driver med. Vi vet dette er en dårlig løsning, men vi vil forbedre spesifisering av porter for Docker i fremtiden.
+
+2. Bygg docker-bildene og kjør dem. Det er ulike måter å gå fram på her, men det anbefales å bruke docker-compose
 
 ```
 docker-compose up
@@ -53,7 +58,9 @@ docker-compose up
    sh build_model.sh
    ```
 
-2. Kjør API-et med Python
+2. Endre navnet på [.env.example](backend/.env.example) til `.env` og erstatt verdiene med dine egne
+
+3. Kjør API-et med Python
    ```
    python3 src/api.py
    ```
@@ -65,7 +72,9 @@ docker-compose up
    npm i
    ```
 
-2. Kjør websiden med Node
+2. Endre navnet på [.env.example](frontend/.env.example) til `.env` og erstatt verdiene med dine egne
+
+3. Kjør websiden med Node
    ```
    npm start
    ```
