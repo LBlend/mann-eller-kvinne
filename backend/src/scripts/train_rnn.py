@@ -22,48 +22,48 @@ def load_datasets(batch_size):
 
 def get_optimizer(name, optimizer_args={}):
     options = {
-        "Adam": tf.keras.optimizers.Adam,
-        "RMSProp": tf.keras.optimizers.RMSprop,
-        "SGD": tf.keras.optimizers.SGD,
+        'Adam': tf.keras.optimizers.Adam,
+        'RMSProp': tf.keras.optimizers.RMSprop,
+        'SGD': tf.keras.optimizers.SGD,
     }
 
     constructor = options.get(name)
 
     if not constructor:
-        raise TypeError(f"Invalid optimizer: {name}")
+        raise TypeError(f'Invalid optimizer: {name}')
     else:
         return constructor(**optimizer_args)
 
 
 def get_model(train_set, config):
-    shapes = config["model_shapes"]
+    shapes = config['model_shapes']
 
     encoder = tf.keras.layers.experimental.preprocessing.TextVectorization(
-        max_tokens=shapes["vocab_size"]
+        max_tokens=shapes['vocab_size']
     )
 
     encoder.adapt(train_set.map(lambda text, label: text))
 
-    lstm = tf.keras.layers.LSTM(shapes["lstm"])
+    lstm = tf.keras.layers.LSTM(shapes['lstm'])
 
-    if config["bidirectional"]:
+    if config['bidirectional']:
         lstm = tf.keras.layers.Bidirectional(lstm)
 
     model = tf.keras.Sequential([
         encoder,
         tf.keras.layers.Embedding(
             input_dim=len(encoder.get_vocabulary()),
-            output_dim=shapes["embedding"],
+            output_dim=shapes['embedding'],
             mask_zero=True
         ),
         lstm,
-        tf.keras.layers.Dense(shapes["dense"], activation='relu'),
+        tf.keras.layers.Dense(shapes['dense'], activation='relu'),
         tf.keras.layers.Dense(1, activation='sigmoid')
     ])
 
     model.compile(
         loss=tf.keras.losses.BinaryCrossentropy(),
-        optimizer=get_optimizer(config["optimizer_type"], config["optimizer_args"]),
+        optimizer=get_optimizer(config['optimizer_type'], config['optimizer_args']),
         metrics=['accuracy'],
     )
 
@@ -73,13 +73,13 @@ def get_model(train_set, config):
 def get_train_callbacks(config):
     train_callbacks = []
 
-    early_stopper_args = config.get("early_stopper")
+    early_stopper_args = config.get('early_stopper')
     if early_stopper_args:
         early_stopper = tf.keras.callbacks.EarlyStopping(**early_stopper_args),
         train_callbacks.append(early_stopper)
 
-    if config.get("log_folder"):
-        log_path = f"logs/{config['log_folder']}/"
+    if config.get('log_folder'):
+        log_path = f'logs/{config["log_folder"]}/'
         tb_callback = tf.keras.callbacks.TensorBoard(log_dir=log_path)
         train_callbacks.append(tb_callback)
 
@@ -87,13 +87,13 @@ def get_train_callbacks(config):
 
 
 def train(config):
-    output_path = f"bin/{config['output_folder']}"
+    output_path = f'bin/{config["output_folder"]}'
 
     # Set global seed for reproducibility
-    np.random.seed(config.get("random_seed"))
-    tf.random.set_seed(config.get("random_seed"))
+    np.random.seed(config.get('random_seed'))
+    tf.random.set_seed(config.get('random_seed'))
 
-    raw_train_ds, raw_dev_ds = load_datasets(batch_size=config["batch_size"])
+    raw_train_ds, raw_dev_ds = load_datasets(batch_size=config['batch_size'])
 
     model = get_model(raw_train_ds, config)
 
@@ -101,7 +101,7 @@ def train(config):
 
     model.fit(
         raw_train_ds,
-        epochs=config["epochs"],
+        epochs=config['epochs'],
         validation_data=raw_dev_ds,
         callbacks=train_callbacks,
     )
@@ -113,14 +113,14 @@ def train(config):
 
 if __name__ == '__main__':
     parser = ArgumentParser()
-    parser.add_argument("config", nargs="?", default="rnn_default.yaml")
+    parser.add_argument('config', nargs='?', default='rnn_default.yaml')
     args = parser.parse_args()
 
-    with open(f"configs/{args.config}") as f:
+    with open(f'configs/{args.config}') as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
 
     # Allows use of scientific notation
-    config["optimizer_args"]["learning_rate"] = float(config["optimizer_args"]["learning_rate"])
+    config['optimizer_args']['learning_rate'] = float(config['optimizer_args']['learning_rate'])
 
-    print("\n".join(f"{k}: {v}" for k, v in config.items()))
+    print('\n'.join(f'{k}: {v}' for k, v in config.items()))
     train(config)
