@@ -1,74 +1,123 @@
-# import numpy as np
+import numpy as np
 import tensorflow as tf
-from tensorflow import keras
+from argparse import ArgumentParser
+import yaml
+
+TRAIN_DIR = 'corpus/data/train'
+DEV_DIR = 'corpus/data/dev'
+# TEST_DIR = 'corpus/data/test'
 
 
-train_dir = 'corpus/data/train'
-dev_dir = 'corpus/data/dev'
-test_dir = 'corpus/data/test'
-
-batch_size = 32
-buffer_size = 10000
-seed = 42
-VOCAB_SIZE = 1000
-
-
-def load_datasets():
-    train = keras.preprocessing.text_dataset_from_directory(
-        train_dir,
+def load_datasets(batch_size):
+    train = tf.keras.preprocessing.text_dataset_from_directory(
+        TRAIN_DIR,
         batch_size=batch_size)
 
-    dev = keras.preprocessing.text_dataset_from_directory(
-        dev_dir,
+    dev = tf.keras.preprocessing.text_dataset_from_directory(
+        DEV_DIR,
         batch_size=batch_size)
 
     return train, dev
 
 
-def get_model(train_set):
-    encoder = keras.layers.experimental.preprocessing.TextVectorization(
-        max_tokens=VOCAB_SIZE)
+def get_optimizer(name, optimizer_args={}):
+    options = {
+        "Adam": tf.keras.optimizers.Adam,
+        "RMSProp": tf.keras.optimizers.RMSprop,
+        "SGD": tf.keras.optimizers.SGD,
+    }
+
+    constructor = options.get(name)
+
+    if not constructor:
+        raise TypeError(f"Invalid optimizer: {name}")
+    else:
+        return constructor(**optimizer_args)
+
+
+def get_model(train_set, config):
+    shapes = config["model_shapes"]
+
+    encoder = tf.keras.layers.experimental.preprocessing.TextVectorization(
+        max_tokens=shapes["vocab_size"]
+    )
 
     encoder.adapt(train_set.map(lambda text, label: text))
+
+    lstm = tf.keras.layers.LSTM(shapes["lstm"])
+
+    if config["bidirectional"]:
+        lstm = tf.keras.layers.Bidirectional(lstm)
 
     model = tf.keras.Sequential([
         encoder,
         tf.keras.layers.Embedding(
             input_dim=len(encoder.get_vocabulary()),
-            output_dim=64,
-            mask_zero=True),
-        tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64)),
-        tf.keras.layers.Dense(64, activation='relu'),
+            output_dim=shapes["embedding"],
+            mask_zero=True
+        ),
+        lstm,
+        tf.keras.layers.Dense(shapes["dense"], activation='relu'),
         tf.keras.layers.Dense(1, activation='sigmoid')
     ])
 
-    model.compile(loss=tf.keras.losses.BinaryCrossentropy(),
-                  optimizer=tf.keras.optimizers.Adam(1e-4),
-                  metrics=['accuracy'])
+    model.compile(
+        loss=tf.keras.losses.BinaryCrossentropy(),
+        optimizer=get_optimizer(config["optimizer_type"], config["optimizer_args"]),
+        metrics=['accuracy'],
+    )
 
     return model
 
 
-def train(path):
+def get_train_callbacks(config):
+    train_callbacks = []
+
+    early_stopper_args = config.get("early_stopper")
+    if early_stopper_args:
+        early_stopper = tf.keras.callbacks.EarlyStopping(**early_stopper_args),
+        train_callbacks.append(early_stopper)
+
+    if config.get("log_folder"):
+        log_path = f"logs/{config['log_folder']}/"
+        tb_callback = tf.keras.callbacks.TensorBoard(log_dir=log_path)
+        train_callbacks.append(tb_callback)
+
+    return train_callbacks
+
+
+def train(config):
+    output_path = f"bin/{config['output_folder']}"
+
     # Set global seed for reproducibility
-    tf.random.set_seed(seed)
+    np.random.seed(config.get("random_seed"))
+    tf.random.set_seed(config.get("random_seed"))
 
-    raw_train_ds, raw_dev_ds = load_datasets()
+    raw_train_ds, raw_dev_ds = load_datasets(batch_size=config["batch_size"])
 
-    model = get_model(raw_train_ds)
+    model = get_model(raw_train_ds, config)
 
-    # history =
+    train_callbacks = get_train_callbacks(config)
+
     model.fit(
         raw_train_ds,
-        epochs=10,
+        epochs=config["epochs"],
         validation_data=raw_dev_ds,
-        validation_steps=10
+        callbacks=train_callbacks,
     )
 
-    model.save(path)
+    model.save(output_path)
 
     return model
 
 
 if __name__ == '__main__':
-    train('bin/rnn')
+    parser = ArgumentParser()
+    parser.add_argument("config", nargs="?", default="rnn_default.yaml")
+    args = parser.parse_args()
+
+    with open(f"configs/{args.config}") as f:
+        config = yaml.load(f, Loader=yaml.FullLoader)
+
+    print("\n".join(f"{k}: {v}" for k, v in config.items()))
+    train(config)
