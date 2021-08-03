@@ -119,5 +119,8 @@ if __name__ == '__main__':
     with open(f"configs/{args.config}") as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
 
+    # Allows use of scientific notation
+    config["optimizer_args"]["learning_rate"] = float(config["optimizer_args"]["learning_rate"])
+
     print("\n".join(f"{k}: {v}" for k, v in config.items()))
     train(config)
