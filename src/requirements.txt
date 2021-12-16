@@ -1,8 +1,0 @@
-python-dotenv
-tdqm
-numpy==1.19.5
-nltk
-flask
-flask_cors
-tensorflow>=2
-sklearn
