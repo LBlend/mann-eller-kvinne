@@ -1,5 +1,5 @@
-from flask import Flask, request
-from flask_cors import CORS, cross_origin
+from fastapi import FastAPI
+from pydantic import BaseModel
 
 import classifier
 
@@ -12,46 +12,37 @@ frontend_url = getenv('FRONTEND_URL')
 port = getenv('PORT')
 
 
-app = Flask(__name__)
-CORS(app, resources={r'/*': {'origins': [frontend_url, f'http://localhost:{port}']}})
-cross_origin(
-    origins=[frontend_url, f'http://localhost:{port}'],
-    methods=['GET', 'POST'],
-    always_send=True,
-    automatic_options=True,
-    headers=['Content-Type']
-)
+app = FastAPI()
 
 
-@app.route('/')
+class PredictionInput(BaseModel):
+    text: str
+    clf: str
+
+
+
+@app.get('/')
 def home():
     return 'API goes BRRRRRRRRRRR\nYeet'
 
 
-@app.route('/mann-eller-kvinne', methods=['POST'])
-def mann_eller_kvinne():
-    '''
+@app.post('/mann-eller-kvinne')
+def mann_eller_kvinne(payload: PredictionInput):
+    """
     Input fields:
         text: str | input data for classifier
         clf: str | which classifier to use, default: bayes
 
     Output fields:
-        clf: str
+        clf: str | which classifier was used
         probs: JSON
             M: float | estimated probability for the male class
             F: float | estimated probability for the female class
-    '''
-    data = request.get_json()
-    print('Received', data)
-    text = data['text']
-    if not text:
+    """
+    print('Received', payload)
+    if not payload.text:
         return 'Du må gi meg noe tekst da idiot!'
 
-    clf = data.get('clf', 'bayes')
-    response = classifier.predict(text, clf)
+    response = classifier.predict(payload.text, payload.clf)
     print('Responding with', response)
     return response
-
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=port)
