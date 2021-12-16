@@ -39,6 +39,7 @@ def mann_eller_kvinne(payload: PredictionInput):
             M: float | estimated probability for the male class
             F: float | estimated probability for the female class
     """
+
     print('Received', payload)
     if not payload.text:
         return 'Du må gi meg noe tekst da idiot!'
