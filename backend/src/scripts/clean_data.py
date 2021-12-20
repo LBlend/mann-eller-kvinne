@@ -1,11 +1,11 @@
 import os
 import shutil
 
-data_path = './corpus/data'
+data_path = "./corpus/data"
 
-splits = ('train', 'dev', 'test')
+splits = ("train", "dev", "test")
 
-new_dir = f'{data_path}/ETC'
+new_dir = f"{data_path}/ETC"
 
 
 def move_etc_data():
@@ -15,10 +15,10 @@ def move_etc_data():
         pass
 
     for s in splits:
-        cur_path = f'{data_path}/{s}'
+        cur_path = f"{data_path}/{s}"
         for i in os.listdir(cur_path):
-            if i not in {'M', 'F'}:
-                shutil.move(f'{cur_path}/{i}', f'{new_dir}/{s}')
+            if i not in {"M", "F"}:
+                shutil.move(f"{cur_path}/{i}", f"{new_dir}/{s}")
 
 
 if __name__ == "__main__":

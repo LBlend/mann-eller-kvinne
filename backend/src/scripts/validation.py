@@ -4,14 +4,16 @@ import nltk
 import pickle
 import train_bayes
 
-dev_dir = 'corpus/data/dev'
-test_dir = 'corpus/data/test'
+dev_dir = "corpus/data/dev"
+test_dir = "corpus/data/test"
 batch_size = 10000
 
 
 def get_dev_test():
     for dir in dev_dir, test_dir:
-        data = keras.preprocessing.text_dataset_from_directory(dir, batch_size=batch_size)
+        data = keras.preprocessing.text_dataset_from_directory(
+            dir, batch_size=batch_size
+        )
         yield next(iter(data))
 
 
@@ -21,7 +23,7 @@ def get_predict_rnn(model_path):
 
 
 def get_predict_bayes(model_path):
-    with open(model_path, 'rb') as f:
+    with open(model_path, "rb") as f:
         bayes_model = pickle.load(f)
 
     def predict_on_str(text):
@@ -34,13 +36,13 @@ def get_predict_bayes(model_path):
     return lambda x: [predict_on_str(s) for s in x]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     dev_set, test_set = get_dev_test()
 
-    predict_rnn = get_predict_rnn('bin/rnn')
-    predict_bayes = get_predict_bayes('bin/bayes_model.pkl')
+    predict_rnn = get_predict_rnn("bin/rnn")
+    predict_bayes = get_predict_bayes("bin/bayes_model.pkl")
 
-    for name, (X, y) in [('dev', dev_set), ('test', test_set)]:
+    for name, (X, y) in [("dev", dev_set), ("test", test_set)]:
         X = X.numpy()
         y_pred = predict_rnn(X)
         print("Results for", name, "with rnn:")
