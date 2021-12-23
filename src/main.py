@@ -41,8 +41,11 @@ def mann_eller_kvinne(payload: PredictionInput):
     """
 
     print("Received", payload)
+
     if not payload.text:
-        return {"status": "failed", "message": "Du må gi meg noe tekst da idiot!"}
+        response = {"status": "failed", "message": "Du må gi meg noe tekst da idiot!"}
+        print("Responding with", response)
+        return response
 
     response = classifier.predict(payload.text, payload.clf)
     print("Responding with", response)
