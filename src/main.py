@@ -8,8 +8,8 @@ from os import getenv
 
 
 load_dotenv()
-frontend_url = getenv('FRONTEND_URL')
-port = getenv('PORT')
+frontend_url = getenv("FRONTEND_URL")
+port = getenv("PORT")
 
 
 app = FastAPI()
@@ -20,13 +20,12 @@ class PredictionInput(BaseModel):
     clf: str
 
 
-
-@app.get('/')
+@app.get("/")
 def home():
-    return 'API goes BRRRRRRRRRRR\nYeet'
+    return "API goes BRRRRRRRRRRR\nYeet"
 
 
-@app.post('/mann-eller-kvinne')
+@app.post("/mann-eller-kvinne")
 def mann_eller_kvinne(payload: PredictionInput):
     """
     Input fields:
@@ -40,10 +39,10 @@ def mann_eller_kvinne(payload: PredictionInput):
             F: float | estimated probability for the female class
     """
 
-    print('Received', payload)
+    print("Received", payload)
     if not payload.text:
-        return 'Du må gi meg noe tekst da idiot!'
+        return {"status": "failed", "message": "Du må gi meg noe tekst da idiot!"}
 
     response = classifier.predict(payload.text, payload.clf)
-    print('Responding with', response)
+    print("Responding with", response)
     return response
