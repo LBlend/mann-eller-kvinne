@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from os import getenv
 
 
+# Get environment variables
 load_dotenv()
 frontend_url = getenv("FRONTEND_URL")
 port = getenv("PORT")
