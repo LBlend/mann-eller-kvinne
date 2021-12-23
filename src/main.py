@@ -40,11 +40,8 @@ def mann_eller_kvinne(payload: PredictionInput):
             F: float | estimated probability for the female class
     """
 
-    print("Received", payload)
-
     if not payload.text:
         raise HTTPException(status_code=400, detail="Du må gi meg noe tekst da idiot!")
 
     response = classifier.predict(payload.text, payload.clf)
-    print("Responding with", response)
     return response
