@@ -1,15 +1,11 @@
-FROM ubuntu:20.04
+FROM python:3.10
 
-WORKDIR /app
+WORKDIR /code
 
-COPY . ./
+COPY ./requirements.txt /code/requirements.txt
 
-RUN apt-get update && apt-get install -y build-essential git python3 python3-pip
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
-RUN sh build_backend.sh
+COPY ./app /code/app
 
-ENV PORT=5000
-
-EXPOSE 5000
-
-CMD ["python3", "./src/api.py"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5000", "--proxy-headers"]
