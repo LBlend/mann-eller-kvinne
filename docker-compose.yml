@@ -3,7 +3,7 @@ version: "3"
 services:
   backend:
     container_name: mann-eller-kvinne-backend
-    build: "."
+    image: "ghcr.io/lblend/mann-eller-kvinne:latest"
     ports:
       - "5000:5000"
 
