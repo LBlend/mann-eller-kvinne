@@ -4,13 +4,17 @@
     <img src="https://raw.githubusercontent.com/LBlend/mann-eller-kvinne/main/.static/mann-eller-kvinne.png?token=AF55TQTQ2EPX6JP33MO4NLK73QQZG">
 </div>
 
+<a href="README.md">🇳🇴 Norsk</a>
+
+_This repo is the backend for the mann-eller-kvinne project. You can find the repo for the fontend by clicking [this link](https://github.com/LBlend/mann-eller-kvinne-frontend)._
+
 The website makes a guess by using simple machine learning algorithms.
 The model is trained on 3000+ book reviews featured in norwegian media and its goal is to highlight the difference between men and women in the way they write.
 
 The concept of this website is inspired by a controversy in Norway. This controversy stemmed from a criminal offense case where threatning letters had been sent. There was discussion about whether or not the letters were written by a man or a woman due to the letter using the word "tisse" instead of "pisse". You can read more about the case [here](https://www.nrk.no/kultur/uenige-om-bruken-av-ordet-_tisse_-1.15206839)
 
-You're welcome to contribute if you feel like there's something missing or if there's something that can be improved. If you know react or know anything about machine learning we highly appreaciate any contributions.
-Before contributing though, check out the [contribution guide](CONTRIBUTING-en.md)
+You're welcome to contribute if you feel like there's something missing or if there's something that can be improved. If have any expreience with machine learning we highly appreaciate any contributions.
+Before contributing though, check out the [contribution guide](CONTRIBUTING-en.md). If you know React or have any experience with web development and want to contribute to the frontend, head over to its repo.
 
 ## A quick note
 
@@ -18,53 +22,32 @@ This website's purpose is to discover the difference between men and women in th
 It should be noted though that the models that are used to make predictions are not optimized and are trained on a fairly small dataset.
 In other words, you should think critically about the results. This project's is not meant for any serious purpose or reasearch.
 
-## Installation
+## Get started
 
 <details>
   <summary>Docker</summary>
     
-1. Rename the `.env.example` files in the [frontend](frontend) and [backend](backend) folder to `.env` and replace the values within them with your own.
-
-#### ⚠️ Regarding ports ⚠️
-It is important that the port numbers within the `.env` file, the [docker-compose.yml](docker-compose.yml) file and `dockerfile` files comply with each other. If you don't know what you're doing we recommend that you stay away from changing anything regarding ports. This is a tedious way of doing things but we are looking to improve this process in the future and make it easier to change ports when using Docker.
-
-2. Build the Docker images and run them. We recommend using docker-compose
-
-```
-docker-compose up
-```
+Coming soon™
 
 </details>
 
 <details>
   <summary>Manual</summary>
 
-0. Download the repo and install the dependencies
+0. Clone this repo and install the dependencies
 
-- node.js
-- npm
-- python3
-- pip
+- Python 3.10+
+- Pip
 
-#### Backend
-
-1. Run the backend build script from the /backend folder
+1. Run the build/installation script from the [/src](src) folder
    `sh build_model.sh`
 
-2. Change the name of the file [.env.example](backend/.env.example) to `.env` og replace the values within it with your own
+_Note that this script assumes that you have set `python3` as the PATH to your Python installation. If this isn't the case, you have to modify the script or change your path accordingly._
 
-3. Run the API with Python
-   `python3 src/api.py`
-
-#### Frontend
-
-1. Install frontend dependencies  
-   `npm i`
-
-2. Change the name of the file [.env.example](frontend/.env.example) to `.env` og replace the values within it with your own
-
-3. Run the website with Node
-   `npm start`
+2. Run the API
+   ```
+   uvicorn app.main:app --host 0.0.0.0 --port 5000 --proxy-headers
+   ```
 
 </details>
 
@@ -87,7 +70,3 @@ You can find the source for this corpus [here](https://github.com/ltgoslo/norec_
     pages = "125--138"
 }
 ```
-
-## License
-
-[GNU GPLv3](LICENSE)

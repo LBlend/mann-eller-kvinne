@@ -2,20 +2,20 @@
     <h1>🤵 Mann eller Kvinne? 💃</h1>
     <p>En nettside som gjetter om du er mann eller kvinne basert på hva du skriver</p>
     <img src="https://raw.githubusercontent.com/LBlend/mann-eller-kvinne/main/.static/mann-eller-kvinne.png?token=AF55TQTQ2EPX6JP33MO4NLK73QQZG">
-    
 
-<a href="README-en.md">English</a>
+<a href="README-en.md">🇬🇧 English</a>
+
 </div>
+
+_Dette er repoet for backenden til prosjektet mann-eller-kvinne. Frontenden kan du finne [her](https://github.com/LBlend/mann-eller-kvinne-frontend)._
 
 Nettsida gjetter om du er mann eller kvinne ved bruk av enkel maskinlæring.
 Maskinlæringsmodellen er trent på over 3000 anmeldelser fra norsk media og har som formål å finne ut av hva som skiller kvinner og menn skriftlig.
 
-
 Konseptet er inspirert av debatten som oppstod i Berteheussen-saken, hvor det skal ha blitt diskutert hvorvidt det er en mann som kan ha skrevet trusselbrevene som er omtalt. Dette på grunn av at ordet "tisse" ble brukt fremfor ordet "pisse". Du kan lese mer om saken [her](https://www.nrk.no/kultur/uenige-om-bruken-av-ordet-_tisse_-1.15206839)
 
-
-Om du mener at denne kan forbedres, kan du gjerne bidra. Kan du react eller har kunnskap om maskinlæring så er det bare å åpne opp din favoritteditor og hive seg på!
-Sjekk [bidragsguiden](CONTRIBUTING.md)
+Om du mener at denne kan forbedres, kan du gjerne bidra. Har du kunnskap om maskinlæring så er det bare å åpne opp din favoritteditor og hive seg på!
+Sjekk [bidragsguiden](CONTRIBUTING.md). Om du kan React og webutvikling kan du også bidra med å forbedre frontenden ved å dra til frontendrepoet som er nevnt ovenfor.
 
 ## En liten kommentar
 
@@ -27,17 +27,8 @@ Man skal dermed ikke ta denne så seriøst. Dette er bare et prosjekt laget for 
 
 <details>
   <summary>Docker</summary>
-    
-1. Gjør om navnet på `.env.example` filene i [frontend](frontend)- og [backend](backend)mappa til `.env` og erstatt verdiene med dine egne
 
-#### ⚠️ Angående porter ⚠️
-For å unngå problemer er det viktig at portene i `.env` filene, [docker-compose.yml](docker-compose.yml) filen og `dockerfile` i både frontend og backend samsvarer. Unngå å endre porter om du ikke vet hva du driver med. Vi vet dette er en dårlig løsning, men vi vil forbedre spesifisering av porter for Docker i fremtiden.
-
-2. Bygg docker-bildene og kjør dem. Det er ulike måter å gå fram på her, men det anbefales å bruke docker-compose
-
-```
-docker-compose up
-```
+Kommer snart™
 
 </details>
 
@@ -46,37 +37,20 @@ docker-compose up
 
 0. Last ned repoet og installer avhengigheter
 
-- node.js
-- npm
-- python3
-- pip
+- Python 3.10+
+- Pip
 
-#### Backend
+1. Kjør installasjon- og treningssskriptet fra [/src](src) mappa
 
-1. Kjør build-scriptet for backend fra /backend mappa
    ```
    sh build_model.sh
    ```
 
-2. Endre navnet på [.env.example](backend/.env.example) til `.env` og erstatt verdiene med dine egne
+_Merk deg at dette skriptet antar at PATH til python er satt til `python3`. Hvis dette ikke er tilfellet for deg, må du huske å endre skriptet eller PATHen din._
 
-3. Kjør API-et med Python
+2. Kjør APIet
    ```
-   python3 src/api.py
-   ```
-
-#### Frontend
-
-1. Installer avhengigheter for frontend  
-   ```
-   npm i
-   ```
-
-2. Endre navnet på [.env.example](frontend/.env.example) til `.env` og erstatt verdiene med dine egne
-
-3. Kjør websiden med Node
-   ```
-   npm start
+   uvicorn app.main:app --host 0.0.0.0 --port 5000 --proxy-headers
    ```
 
 </details>
@@ -100,7 +74,3 @@ Du kan finne korpuset som er brukt [her](https://github.com/ltgoslo/norec_gender
     pages = "125--138"
 }
 ```
-
-## Lisens
-
-[GNU GPLv3](LICENSE)
