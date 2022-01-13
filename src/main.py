@@ -1,15 +1,6 @@
+import classifier
 from fastapi import FastAPI
 from pydantic import BaseModel
-
-import classifier
-
-from dotenv import load_dotenv
-from os import getenv
-
-
-load_dotenv()
-frontend_url = getenv('FRONTEND_URL')
-port = getenv('PORT')
 
 
 app = FastAPI()
@@ -20,14 +11,13 @@ class PredictionInput(BaseModel):
     clf: str
 
 
+@app.get("/")
+def home() -> str:
+    return "API goes BRRRRRRRRRRR\nYeet"
 
-@app.get('/')
-def home():
-    return 'API goes BRRRRRRRRRRR\nYeet'
 
-
-@app.post('/mann-eller-kvinne')
-def mann_eller_kvinne(payload: PredictionInput):
+@app.post("/mann-eller-kvinne")
+def mann_eller_kvinne(payload: PredictionInput) -> dict[str, str | dict[str, float]]:
     """
     Input fields:
         text: str | input data for classifier
@@ -40,10 +30,10 @@ def mann_eller_kvinne(payload: PredictionInput):
             F: float | estimated probability for the female class
     """
 
-    print('Received', payload)
+    print("Received", payload)
     if not payload.text:
-        return 'Du må gi meg noe tekst da idiot!'
+        return "Du må gi meg noe tekst da idiot!"
 
     response = classifier.predict(payload.text, payload.clf)
-    print('Responding with', response)
+    print("Responding with", response)
     return response

@@ -1,41 +1,46 @@
+# from collections import Counter
 import json
 import os
 import shutil
 from tqdm import tqdm
-# from collections import Counter
 
-corpus_data = './corpus/data'
 
+CORPUS_DATA_PATH = "./corpus/data"
+SPLITS = ("train", "dev", "test")
 classes = []
-splits = ('train', 'dev', 'test')
 
 
-def main():
-    with open(f'{corpus_data}/metadata_norec_gender.json', 'r', encoding='utf-8') as f:
+def main() -> None:
+    with open(
+        f"{CORPUS_DATA_PATH}/metadata_norec_gender.json", "r", encoding="utf-8"
+    ) as f:
         metadata = json.load(f)
 
-    for entry, content in tqdm(metadata.items(), desc='Organizing data by label'):
-        gender, *_ = genders = content['gender_critics']
+    for entry, content in tqdm(metadata.items(), desc="Organizing data by label"):
+        gender, *_ = genders = content["gender_critics"]
 
         if len(genders) > 1:
             # gender, = Counter(genders).most_common(1)[0]
-            gender = 'MULTI_AUTHOR'
+            gender = "MULTI_AUTHOR"
 
-        split = content['split']
+        split = content["split"]
         if gender not in classes:
-            for s in splits:
+            for s in SPLITS:
                 try:
-                    os.mkdir(f'{corpus_data}/{s}/{gender}')
+                    os.mkdir(f"{CORPUS_DATA_PATH}/{s}/{gender}")
                 except FileExistsError:
                     pass
 
                 classes.append(gender)
 
         try:
-            shutil.move(f'{corpus_data}/{split}/{entry}.txt', f'{corpus_data}/{split}/{gender}/{entry}.txt')
+            shutil.move(
+                f"{CORPUS_DATA_PATH}/{split}/{entry}.txt",
+                f"{CORPUS_DATA_PATH}/{split}/{gender}/{entry}.txt",
+            )
         except FileNotFoundError as e:
             print(e)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

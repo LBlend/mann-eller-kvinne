@@ -1,74 +1,65 @@
 # import numpy as np
-import tensorflow as tf
 from tensorflow import keras
+import tensorflow as tf
 
 
-train_dir = 'corpus/data/train'
-dev_dir = 'corpus/data/dev'
-test_dir = 'corpus/data/test'
+TRAIN_DIR = "corpus/data/train"
+DEV_DIR = "corpus/data/dev"
+TEST_DIR = "corpus/data/test"
 
-batch_size = 32
-buffer_size = 10000
-seed = 42
+BATCH_SIZE = 32
+BUFFER_SIZE = 10000
+SEED = 42
 VOCAB_SIZE = 1000
 
 
-def load_datasets():
+def load_datasets() -> tuple[tf.data.Dataset, tf.data.Dataset]:
     train = keras.preprocessing.text_dataset_from_directory(
-        train_dir,
-        batch_size=batch_size)
-
+        TRAIN_DIR, batch_size=BATCH_SIZE
+    )
     dev = keras.preprocessing.text_dataset_from_directory(
-        dev_dir,
-        batch_size=batch_size)
+        DEV_DIR, batch_size=BATCH_SIZE
+    )
 
     return train, dev
 
 
-def get_model(train_set):
+def get_model(train_set: tf.data.Dataset) -> keras.Model:
     encoder = keras.layers.experimental.preprocessing.TextVectorization(
-        max_tokens=VOCAB_SIZE)
+        max_tokens=VOCAB_SIZE
+    )
+    encoder.adapt(train_set.map(lambda text: text))
 
-    encoder.adapt(train_set.map(lambda text, label: text))
-
-    model = tf.keras.Sequential([
-        encoder,
-        tf.keras.layers.Embedding(
-            input_dim=len(encoder.get_vocabulary()),
-            output_dim=64,
-            mask_zero=True),
-        tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64)),
-        tf.keras.layers.Dense(64, activation='relu'),
-        tf.keras.layers.Dense(1, activation='sigmoid')
-    ])
-
-    model.compile(loss=tf.keras.losses.BinaryCrossentropy(),
-                  optimizer=tf.keras.optimizers.Adam(1e-4),
-                  metrics=['accuracy'])
+    model = tf.keras.Sequential(
+        [
+            encoder,
+            tf.keras.layers.Embedding(
+                input_dim=len(encoder.get_vocabulary()), output_dim=64, mask_zero=True
+            ),
+            tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64)),
+            tf.keras.layers.Dense(64, activation="relu"),
+            tf.keras.layers.Dense(1, activation="sigmoid"),
+        ]
+    )
+    model.compile(
+        loss=tf.keras.losses.BinaryCrossentropy(),
+        optimizer=tf.keras.optimizers.Adam(1e-4),
+        metrics=["accuracy"],
+    )
 
     return model
 
 
-def train(path):
-    # Set global seed for reproducibility
-    tf.random.set_seed(seed)
+def train(path: str) -> keras.Model:
+    tf.random.set_seed(SEED)  # Set global seed for reproducibility
 
     raw_train_ds, raw_dev_ds = load_datasets()
-
     model = get_model(raw_train_ds)
-
-    # history =
-    model.fit(
-        raw_train_ds,
-        epochs=10,
-        validation_data=raw_dev_ds,
-        validation_steps=10
-    )
-
+    model.fit(raw_train_ds, epochs=10, validation_data=raw_dev_ds, validation_steps=10)
     model.save(path)
 
     return model
 
 
-if __name__ == '__main__':
-    train('bin/rnn')
+if __name__ == "__main__":
+    train("bin/rnn")
