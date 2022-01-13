@@ -14,4 +14,4 @@
 - Sort imports by alphabetical order
 - Make sure your code falls in line with pep8
 - Format your code with black
-- Make sure to freeze dependencies to the latest supported version if you add any
+- Make sure to pin dependencies to the latest supported version if you add any
