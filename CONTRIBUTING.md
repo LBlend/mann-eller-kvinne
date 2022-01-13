@@ -1,19 +1,17 @@
-# Bidragsguide
+# 🇳🇴 Norsk
 
-[English](CONTRIBUTING-en.md)
+## Bidragssguide
 
-## Generelt
+- Sorter imports i alfabetisk rekkefølge
+- Følg pep8
+- Autoformatér koden med black
+- Om du legger til noen nye avhengigheter så skal disse fryses til nyeste støttede versjon
 
-Snart™
+# 🇬🇧 English
 
-## Back-end
+## Contribution guidelines
 
-All python kode må følge følgende konvesjoner:
-
-- PEP8, men hvor maks antall tegn per linje er 120.
-- Alle strings skal bruke enkle anførselstegn, altså `'`. Unntaket er om det er en string inni en string.
-- Filer, variabler og funksjonsnavn skal bruke snake_case.
-
-## Annet
-
-- Docker-relaterte filer skal bruke doble anførselstegn, altså `"`.
+- Sort imports by alphabetical order
+- Make sure your code falls in line with pep8
+- Format your code with black
+- Make sure to freeze dependencies to the latest supported version if you add any
