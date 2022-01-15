@@ -8,7 +8,7 @@ app = FastAPI()
 
 class PredictionInput(BaseModel):
     text: str
-    classifier: str
+    clf: str
 
 
 @app.get("/")
@@ -21,13 +21,13 @@ def mann_eller_kvinne(payload: PredictionInput) -> dict[str, str | dict[str, flo
     """
     Input fields:
         text: str | input data for classifier
-        classifier: str | which classifier to use, default: bayes
+        clf: str | which classifier to use, default: bayes
 
     Output fields:
-        classifier: str | which classifier was used
+        clf: str | which classifier was used
         probs: JSON
-            male: float | estimated probability for the male class
-            female: float | estimated probability for the female class
+            M: float | estimated probability for the male class
+            F: float | estimated probability for the female class
     """
 
     print("Received", payload)
