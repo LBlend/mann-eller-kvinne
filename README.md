@@ -28,7 +28,13 @@ Man skal dermed ikke ta denne så seriøst. Dette er bare et prosjekt laget for 
 <details>
   <summary>Docker</summary>
 
-Kommer snart™
+1. Skriv denne kommandoen for å kjøre webappen.
+
+```
+docker run -d -p 5000:5000 --name mann-eller-kvinne-backend ghcr.io/lblend/mann-eller-kvinne:latest
+```
+
+Her kan du så klart endre på variabler som du ønsker.
 
 </details>
 
