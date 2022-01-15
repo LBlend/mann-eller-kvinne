@@ -39,8 +39,8 @@ Coming soon™
 - Python 3.10+
 - Pip
 
-1. Run the build/installation script from the [/src](src) folder
-   `sh build_model.sh`
+1. Run the build/installation script
+   `sh build.sh`
 
 _Note that this script assumes that you have set `python3` as the PATH to your Python installation. If this isn't the case, you have to modify the script or change your path accordingly._
 

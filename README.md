@@ -40,10 +40,10 @@ Kommer snart™
 - Python 3.10+
 - Pip
 
-1. Kjør installasjon- og treningssskriptet fra [/src](src) mappa
+1. Kjør installasjon- og treningssskriptet
 
    ```
-   sh build_model.sh
+   sh build.sh
    ```
 
 _Merk deg at dette skriptet antar at PATH til python er satt til `python3`. Hvis dette ikke er tilfellet for deg, må du huske å endre skriptet eller PATHen din._
