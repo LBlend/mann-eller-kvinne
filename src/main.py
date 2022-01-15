@@ -30,10 +30,10 @@ def mann_eller_kvinne(payload: PredictionInput) -> dict[str, str | dict[str, flo
             F: float | estimated probability for the female class
     """
 
-    print("Received", payload)
+    print("Received", payload, sep="\t")
     if not payload.text:
         return "Du må gi meg noe tekst da idiot!"
 
     response = classifier.predict(payload.text, payload.clf)
-    print("Responding with", response)
+    print("Responding with", response, sep="\t")
     return response
