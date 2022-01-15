@@ -61,6 +61,8 @@ _Merk deg at dette skriptet antar at PATH til python er satt til `python3`. Hvis
 
 </details>
 
+_Det ligger også en (docker-compose][docker-compose.yml] fil i dette repoet som vil sette opp både backend og frontend gjennom Docker. Merk deg derimot at bruk av denne metoden kan sette restriksjoner på konfigurasjonen din. Se frontendrepoet for mer info._
+
 ## Takk
 
 Takk til [LtgOslo](https://www.mn.uio.no/ifi/english/research/groups/ltg/) som har laget det taggede korpuset, datasettet, som er brukt til å trene maskinlæringsmodellen.

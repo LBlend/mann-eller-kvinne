@@ -57,6 +57,8 @@ _Note that this script assumes that you have set `python3` as the PATH to your P
 
 </details>
 
+_In addition to these options you have the option to use the [docker-compose](docker-compose.yml) file included in this repo to run both the frontend and the backend through Docker. Note however that this option may limit your ability to configure your images to your desire. See the frontend repo for more information._
+
 ## Thank you
 
 We want to thank [LtgOslo](https://www.mn.uio.no/ifi/english/research/groups/ltg/) for making the corpus/dataset that is used to train the machine learning model.
