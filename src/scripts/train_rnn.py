@@ -62,4 +62,4 @@ def train(path: str) -> keras.Model:
 
 
 if __name__ == "__main__":
-    train("bin/rnn")
+    train("src/bin/rnn")

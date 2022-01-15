@@ -65,4 +65,4 @@ def train(path: str) -> nltk.NaiveBayesClassifier:
 
 
 if __name__ == "__main__":
-    train("bin/bayes_model.pkl")
+    train("src/bin/bayes_model.pkl")

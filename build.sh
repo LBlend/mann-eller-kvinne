@@ -14,12 +14,12 @@ fi
 echo "Downloading NLTK stopwords and punctuation packages..."
 python3 -c "import nltk; nltk.download('stopwords'); nltk.download('punkt')"
 
-if [ ! -e 'bin/bayes_model.pkl' ]; then
+if [ ! -e 'src/bin/bayes_model.pkl' ]; then
     echo "Training Bayes model..."
     python3 ./src/scripts/train_bayes.py
 fi
 
-if [ ! -d 'bin/rnn' ]; then
+if [ ! -d 'src/bin/rnn' ]; then
     echo "Training RNN model..."
     python3 ./src/scripts/train_rnn.py
 fi
