@@ -2,17 +2,17 @@ import nltk
 import numpy as np
 import pickle
 import os
-from scripts import train_bayes
+from .scripts import train_bayes
 
 # SUPPRESS WARNINGS
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 from tensorflow import keras  # noqa: E402
 
 
-with open("bin/bayes_model.pkl", "rb") as f:
+with open("src/bin/bayes_model.pkl", "rb") as f:
     bayes_model = pickle.load(f)
 
-rnn_model = keras.models.load_model("bin/rnn")
+rnn_model = keras.models.load_model("src/bin/rnn")
 
 
 def predict_bayes(text: str) -> dict[str, float]:

@@ -1,4 +1,4 @@
-import classifier
+from . import classifier
 from fastapi import FastAPI
 from pydantic import BaseModel
 

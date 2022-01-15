@@ -50,7 +50,7 @@ _Merk deg at dette skriptet antar at PATH til python er satt til `python3`. Hvis
 
 2. Kjør APIet
    ```
-   uvicorn app.main:app --host 0.0.0.0 --port 5000 --proxy-headers
+   uvicorn src.main:app --host 0.0.0.0 --port 5000 --proxy-headers
    ```
 
 </details>

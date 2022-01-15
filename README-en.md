@@ -46,7 +46,7 @@ _Note that this script assumes that you have set `python3` as the PATH to your P
 
 2. Run the API
    ```
-   uvicorn app.main:app --host 0.0.0.0 --port 5000 --proxy-headers
+   uvicorn src.main:app --host 0.0.0.0 --port 5000 --proxy-headers
    ```
 
 </details>
