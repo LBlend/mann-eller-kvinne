@@ -2,10 +2,10 @@ FROM python:3.10
 
 WORKDIR /code
 
-COPY ./requirements.txt /code/requirements.txt
+COPY . /code
 
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+RUN chmod +x /code/build.sh
 
-COPY ./app /code/app
+RUN /code/build.sh
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5000", "--proxy-headers"]
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "5000", "--proxy-headers"]
