@@ -28,7 +28,7 @@ def get_model(train_set: tf.data.Dataset) -> keras.Model:
     encoder = keras.layers.experimental.preprocessing.TextVectorization(
         max_tokens=VOCAB_SIZE
     )
-    encoder.adapt(train_set.map(lambda text: text))
+    encoder.adapt(train_set.map(lambda text, label: text))
 
     model = tf.keras.Sequential(
         [
