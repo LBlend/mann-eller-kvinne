@@ -1,14 +1,16 @@
 version: "3"
 
-services: 
+services:
   backend:
-    container_name: backend_mann-eller-kvinne
-    build: "./backend"
-    ports: 
+    container_name: mann-eller-kvinne-backend
+    image: "ghcr.io/lblend/mann-eller-kvinne:latest"
+    ports:
       - "5000:5000"
 
   frontend:
-    container_name: frontend_mann-eller-kvinne
-    build: "./frontend"
-    ports: 
+    container_name: mann-eller-kvinne-frontend
+    image: "ghcr.io/lblend/mann-eller-kvinne-forntend:latest"
+    ports:
       - "3000:3000"
+    depends_on:
+      - backend
