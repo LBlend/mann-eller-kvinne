@@ -1,9 +1,18 @@
 from . import classifier
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost",
+    ],
+    allow_methods=["GET", "POST"],
+)
 
 
 class PredictionInput(BaseModel):
