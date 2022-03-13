@@ -27,7 +27,7 @@ In other words, you should think critically about the results. This project's is
 <details>
   <summary>Docker</summary>
     
-1. Run the webapp
+1. Run the backend
 
 ```
 docker run -d -p 5000:5000 --name mann-eller-kvinne-backend ghcr.io/lblend/mann-eller-kvinne:latest
