@@ -34,7 +34,11 @@ Man skal dermed ikke ta denne så seriøst. Dette er bare et prosjekt laget for 
 docker run -d -p 5000:5000 --name mann-eller-kvinne-backend ghcr.io/lblend/mann-eller-kvinne:latest
 ```
 
-Her kan du så klart endre på variabler som du ønsker.
+Vi anbefaler at du bruker kommandoen gitt ovenfor. Du står derimot fritt til å endre variabler til eget ønske om du vet hva du driver med.
+
+Merk deg at du ikke har mulighet til å endre intern port uten å gjøre endringer i koden.
+
+Merk deg også at ved å bruke ferdigbyggede bilder for både frontend og backend, vil du ikke ha mulighet til å endre port i det hele tatt.
 
 </details>
 

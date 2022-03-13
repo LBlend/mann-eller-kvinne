@@ -33,7 +33,11 @@ In other words, you should think critically about the results. This project's is
 docker run -d -p 5000:5000 --name mann-eller-kvinne-backend ghcr.io/lblend/mann-eller-kvinne:latest
 ```
 
-You are free to change the variables as you desire.
+We reommend using the supplied command above. You are however free to change variables as you please if you know what you're doing.
+
+Note that changing the internal port will break the application without making changes to the code.
+
+Also note that by using our prebuilt images, you won't have the ability to change the port at all.
 
 </details>
 
