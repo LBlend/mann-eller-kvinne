@@ -1,25 +1,28 @@
-import nltk
 import numpy as np
 import pickle
 import os
-from .scripts import train_bayes
 
 # SUPPRESS WARNINGS
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 from tensorflow import keras  # noqa: E402
 
 
-with open("src/bin/bayes_model.pkl", "rb") as f:
+with open("src/bin/bayes_model_sk.pkl", "rb") as f:
     bayes_model = pickle.load(f)
+
+with open("src/bin/vectorizer.pkl", "rb") as f:
+    vectorizer = pickle.load(f)
 
 rnn_model = keras.models.load_model("src/bin/rnn")
 
 
 def predict_bayes(text: str) -> dict[str, float]:
-    text_tokens = nltk.tokenize.word_tokenize(text)
-    text_features = train_bayes.preprocess(text_tokens)
-    dist = bayes_model.prob_classify(text_features)
-    return {"M": dist.prob("man"), "F": dist.prob("woman")}
+    features = vectorizer.transform([text])
+    probs = bayes_model.predict_proba(features)
+    return {
+        "F": probs[0],
+        "M": probs[1],
+    } 
 
 
 def predict_rnn(text: str) -> dict[str, float]:

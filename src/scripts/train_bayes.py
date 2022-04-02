@@ -1,68 +1,66 @@
-import itertools
 import nltk
 import pickle
 from string import punctuation
+from numpy import vectorize
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.feature_extraction.text import CountVectorizer
+import os
+import numpy as np
 
+MODEL_PATH = "src/bin/bayes_model_sk.pkl"
+VECTORIZER_PATH = "src/bin/vectorizer.pkl"
 
 STOPWORDS = nltk.corpus.stopwords.words("norwegian")
+np.random.seed(42)
 
 
-def preprocess(
-    tokens: list[str], trigrams: bool = False, use_stopwords: bool = False
-) -> dict[str, bool | None]:
-    normalized = (token.lower() for token in tokens if token not in punctuation)
-
-    if not use_stopwords:
-        normalized = filter(lambda x: x not in STOPWORDS, normalized)
-
-    lowered = list(normalized)
-    # Make iterator over all elements
-    token_iter = itertools.chain(
-        ((w,) for w in lowered),
-        nltk.bigrams(lowered),
-        nltk.trigrams(lowered) if trigrams else [],
-    )
-
-    return {token: True for token in token_iter}
+def read_file(path):
+    with open(path) as f:
+        content = f.read()
+    return content
 
 
-def _load_corpus() -> nltk.corpus.PlaintextCorpusReader:
-    return nltk.corpus.PlaintextCorpusReader("corpus/data/train", r".*\.txt")
-
-
-def get_text(text: str) -> tuple[list[list[str]], list[list[str]]]:
-    man, woman = [], []
-
-    for file in text.fileids():
-        if file.startswith("M"):
-            man.append([word.lower() for word in text.words(file)])
-        elif file.startswith("F"):
-            woman.append([word.lower() for word in text.words(file)])
-
-    return man, woman
+def _load_corpus() -> tuple[list[str] | np.ndarray]:
+    dir_f = "corpus/data/train/F/"
+    dir_m = "corpus/data/train/M/"
+    files_f = [dir_f + i for i in os.listdir(dir_f)]
+    files_m = [dir_m + i for i in os.listdir(dir_m)]
+    labels_f = np.full(len(files_f), "F")
+    labels_m = np.full(len(files_m), "M")
+    
+    raw_data = list(map(read_file, files_f + files_m))
+    labels = np.concatenate((labels_f, labels_m)) 
+    return raw_data, labels
 
 
 def _save_model(model, path: str) -> None:
-    with open(path, "wb") as f:
+    with open(path, "wb+") as f:
         pickle.dump(model, f)
 
 
-def train(path: str) -> nltk.NaiveBayesClassifier:
-    corpus = _load_corpus()
-    man, woman = get_text(corpus)
+def train() -> MultinomialNB:
+    raw_data, labels = _load_corpus()
 
-    man_feat = [(preprocess(words), "man") for words in man]
-    woman_feat = [(preprocess(words), "woman") for words in woman]
+    vectorizer = CountVectorizer(
+        stop_words=STOPWORDS,
+        ngram_range=[1, 3], # for usage of trigrams and bigrams
+        max_features=5000,
+    )
 
-    train_set = man_feat + woman_feat
-    classifier = nltk.NaiveBayesClassifier.train(train_set)
+    features = vectorizer.fit_transform(raw_data)
+    # shuffle data in case it is not permutation invariant
+    perms = np.random.permutation(len(labels))
+    # Does CSRMatrix handle this?
+    features = features[perms]
+    labels = labels[perms]
 
-    classifier.show_most_informative_features(10)  # Function below outputs to terminal
+    clf = MultinomialNB(fit_prior=False)
 
-    _save_model(classifier, path)
+    clf.fit(features, labels)
 
-    return classifier
+    _save_model(clf, MODEL_PATH)
+    _save_model(vectorizer, VECTORIZER_PATH)
 
 
 if __name__ == "__main__":
-    train("src/bin/bayes_model.pkl")
+    train()
