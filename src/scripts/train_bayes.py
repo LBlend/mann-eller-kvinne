@@ -1,11 +1,11 @@
 import nltk
+from numpy import vectorize
+import numpy as np
+import os
 import pickle
 from string import punctuation
-from numpy import vectorize
-from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction.text import CountVectorizer
-import os
-import numpy as np
+from sklearn.naive_bayes import MultinomialNB
 
 MODEL_PATH = "src/bin/bayes_model_sk.pkl"
 VECTORIZER_PATH = "src/bin/vectorizer.pkl"
