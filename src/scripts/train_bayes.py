@@ -1,9 +1,7 @@
 import nltk
-from numpy import vectorize
 import numpy as np
 import os
 import pickle
-from string import punctuation
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 
