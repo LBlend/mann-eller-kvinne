@@ -22,7 +22,7 @@ def predict_bayes(text: str) -> dict[str, float]:
     return {
         "F": probs[0],
         "M": probs[1],
-    } 
+    }
 
 
 def predict_rnn(text: str) -> dict[str, float]:
