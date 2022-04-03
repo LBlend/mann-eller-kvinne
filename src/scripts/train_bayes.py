@@ -14,7 +14,7 @@ STOPWORDS = nltk.corpus.stopwords.words("norwegian")
 np.random.seed(42)
 
 
-def read_file(path):
+def read_file(path: str) -> str:
     with open(path) as f:
         content = f.read()
     return content
@@ -27,23 +27,23 @@ def _load_corpus() -> tuple[list[str] | np.ndarray]:
     files_m = [dir_m + i for i in os.listdir(dir_m)]
     labels_f = np.full(len(files_f), "F")
     labels_m = np.full(len(files_m), "M")
-    
+
     raw_data = list(map(read_file, files_f + files_m))
-    labels = np.concatenate((labels_f, labels_m)) 
+    labels = np.concatenate((labels_f, labels_m))
     return raw_data, labels
 
 
-def _save_model(model, path: str) -> None:
+def _save_model(model: MultinomialNB, path: str) -> None:
     with open(path, "wb+") as f:
         pickle.dump(model, f)
 
 
-def train() -> MultinomialNB:
+def train() -> None:
     raw_data, labels = _load_corpus()
 
     vectorizer = CountVectorizer(
         stop_words=STOPWORDS,
-        ngram_range=[1, 3], # for usage of trigrams and bigrams
+        ngram_range=[1, 3],  # for usage of trigrams and bigrams
         max_features=5000,
     )
 
