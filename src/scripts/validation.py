@@ -38,11 +38,31 @@ def get_predict_bayes() -> list[int]:
     return lambda x: [predict_on_str(s) for s in x]
 
 
+def get_predict_logreg() -> list[int]:
+    model_path = "src/bin/logreg_model_sk.pkl"
+    vectorizer_path = "src/bin/vectorizer.pkl"
+
+    with open(model_path, "rb") as f:
+        bayes_model = pickle.load(f)
+
+    with open(vectorizer_path, "rb") as f:
+        vectorizer = pickle.load(f)
+
+    def predict_on_str(text: str) -> int:
+        text = text.decode("UTF8")
+        features = vectorizer.transform([text])
+        pred = bayes_model.predict(features)
+        return 0 if pred[0] == "F" else 1
+
+    return lambda x: [predict_on_str(s) for s in x]
+
+
 if __name__ == "__main__":
     dev_set, test_set = get_dev_test()
 
     predict_rnn = get_predict_rnn("src/bin/rnn")
     predict_bayes = get_predict_bayes()
+    predict_logreg = get_predict_logreg()
 
     for name, (X, y) in [("dev", dev_set), ("test", test_set)]:
         X = X.numpy()
@@ -52,4 +72,8 @@ if __name__ == "__main__":
 
         y_pred = predict_bayes(X)
         print("Results for", name, "with bayes:")
+        print(classification_report(y, y_pred))
+
+        y_pred = predict_logreg(X)
+        print("Results for", name, "with logreg:")
         print(classification_report(y, y_pred))
