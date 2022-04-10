@@ -9,7 +9,7 @@ services:
 
   frontend:
     container_name: mann-eller-kvinne-frontend
-    image: "ghcr.io/lblend/mann-eller-kvinne-forntend:latest"
+    image: "ghcr.io/lblend/mann-eller-kvinne-frontend:latest"
     ports:
       - "3000:3000"
     depends_on:
