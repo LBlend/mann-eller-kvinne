@@ -41,7 +41,7 @@ def train() -> None:
 
     vectorizer = CountVectorizer(
         stop_words=STOPWORDS,
-        ngram_range=[1, 3],  # for usage of trigrams and bigrams
+        ngram_range=(1, 3),  # for usage of trigrams and bigrams
         max_features=5000,
     )
 

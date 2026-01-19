@@ -13,8 +13,8 @@ TEST_DIR = "corpus/data/test"
 
 
 def load_datasets(batch_size: int) -> tuple[tf.data.Dataset, tf.data.Dataset]:
-    train = tf.keras.preprocessing.text_dataset_from_directory(TRAIN_DIR, batch_size=batch_size)
-    dev = tf.keras.preprocessing.text_dataset_from_directory(DEV_DIR, batch_size=batch_size)
+    train = tf.keras.utils.text_dataset_from_directory(TRAIN_DIR, batch_size=batch_size)
+    dev = tf.keras.utils.text_dataset_from_directory(DEV_DIR, batch_size=batch_size)
 
     return train, dev
 
@@ -37,7 +37,7 @@ def get_optimizer(name: str, optimizer_args: dict = {}):
 def get_model(train_set: tf.data.Dataset, config: dict) -> tf.keras.Model:
     shapes = config["model_shapes"]
 
-    encoder = tf.keras.layers.experimental.preprocessing.TextVectorization(max_tokens=shapes["vocab_size"])
+    encoder = tf.keras.layers.TextVectorization(max_tokens=shapes["vocab_size"])
 
     encoder.adapt(train_set.map(lambda text, label: text))
 
@@ -86,7 +86,9 @@ def get_train_callbacks(config: dict):
 
 
 def train(config: dict):
-    output_path = f'bin/{config["output_folder"]}'
+    # Create bin directory if it doesn't exist
+    os.makedirs("src/bin", exist_ok=True)
+    output_path = f'src/bin/{config["output_folder"]}.keras'
 
     # Set global seed for reproducibility
     np.random.seed(config.get("random_seed"))
@@ -105,6 +107,7 @@ def train(config: dict):
         callbacks=train_callbacks,
     )
 
+    # Save in Keras 3 format
     model.save(output_path)
 
     return model

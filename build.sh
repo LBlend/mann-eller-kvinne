@@ -19,7 +19,7 @@ if [ ! -e 'src/bin/bayes_model.pkl' ]; then
     python3 ./src/scripts/train_bayes.py
 fi
 
-if [ ! -d 'src/bin/rnn' ]; then
+if [ ! -e 'src/bin/rnn.keras' ]; then
     echo "Training RNN model..."
     python3 ./src/scripts/train_rnn.py
 fi
