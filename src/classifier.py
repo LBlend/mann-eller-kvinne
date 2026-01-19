@@ -14,6 +14,7 @@ from tensorflow import keras  # noqa: E402
 # appropriate file permissions. In production, consider using safer serialization
 # formats like joblib or JSON + model-specific loaders.
 
+
 def safe_pickle_load(filepath: str):
     """
     Load pickle file with basic safety checks.
@@ -30,6 +31,7 @@ def safe_pickle_load(filepath: str):
     with open(filepath, "rb") as f:
         return pickle.load(f)
 
+
 # Load models with safety checks
 try:
     bayes_model = safe_pickle_load("src/bin/bayes_model_sk.pkl")
@@ -41,7 +43,20 @@ try:
         # Fallback to old format directory (for backward compatibility)
         rnn_model_path = "src/bin/rnn"
 
-    rnn_model = keras.models.load_model(rnn_model_path)
+    # Load with safe_mode=True to prevent arbitrary code execution
+    # Note: This only works with .keras files, not .h5/.hdf5
+    try:
+        rnn_model = keras.models.load_model(rnn_model_path, safe_mode=True)
+        print("RNN model loaded in safe mode")
+    except Exception as safe_mode_error:
+        print(f"Safe mode loading failed: {safe_mode_error}")
+        # Fallback to unsafe loading only for trusted local models
+        # In production, this should be removed or require explicit configuration
+        if os.path.basename(rnn_model_path) == "rnn.keras" or os.path.basename(rnn_model_path) == "rnn":
+            print("Loading model without safe_mode (trusted local model)")
+            rnn_model = keras.models.load_model(rnn_model_path, safe_mode=False)
+        else:
+            raise ValueError(f"Refusing to load untrusted model: {rnn_model_path}")
 except Exception as e:
     print(f"Error loading models: {e}")
     raise
