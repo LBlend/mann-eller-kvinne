@@ -20,7 +20,7 @@ scipy==1.15.1
 joblib==1.4.2
 
 # NLP
-nltk==3.9.1
+nltk==3.9.3
 
 # Utilities
 pyyaml==6.0.2
