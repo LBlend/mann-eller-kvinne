@@ -11,10 +11,10 @@ scipy==1.17.*
 joblib==1.5.*
 nltk==3.9.*
 pyyaml==6.0.*
-requests==2.32.*
+requests==2.34.*
 certifi==2026.2.25
 charset-normalizer==3.4.*
-urllib3==2.6.*
+urllib3==2.7.*
 click==8.3.*
 tqdm==4.67.*
 h5py==3.15.*
