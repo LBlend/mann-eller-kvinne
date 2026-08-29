@@ -4,7 +4,7 @@ pydantic-settings==2.13.*
 uvicorn[standard]==0.41.*
 python-dotenv==1.2.*
 tensorflow==2.20.*
-keras==3.13.*
+keras==3.15.*
 scikit-learn==1.8.*
 numpy==2.4.*
 scipy==1.17.*
