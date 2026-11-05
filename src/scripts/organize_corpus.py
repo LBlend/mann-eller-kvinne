@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 CORPUS_DATA_PATH = "./corpus/data"
 SPLITS = ("train", "dev", "test")
-classes = []
+classes = set()
 
 
 def main() -> None:
@@ -31,7 +31,7 @@ def main() -> None:
                 except FileExistsError:
                     pass
 
-                classes.append(gender)
+            classes.add(gender)
 
         try:
             shutil.move(
