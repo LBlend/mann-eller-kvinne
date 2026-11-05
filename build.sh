@@ -6,8 +6,7 @@ uv sync --frozen
 
 if [ ! -d 'corpus' ]; then
     echo "Downloading corpus..."
-    mkdir corpus
-    git clone https://github.com/ltgoslo/norec_gender.git corpus
+    git clone --depth 1 https://github.com/ltgoslo/norec_gender.git corpus
     uv run python ./src/scripts/organize_corpus.py
     uv run python ./src/scripts/clean_data.py
 fi
