@@ -37,7 +37,10 @@ def get_optimizer(name: str, optimizer_args: dict | None = None):
 def get_model(train_set: tf.data.Dataset, config: dict) -> tf.keras.Model:
     shapes = config["model_shapes"]
 
-    encoder = tf.keras.layers.TextVectorization(max_tokens=shapes["vocab_size"])
+    encoder = tf.keras.layers.TextVectorization(
+        max_tokens=shapes["vocab_size"],
+        output_sequence_length=shapes.get("sequence_length"),
+    )
 
     encoder.adapt(train_set.map(lambda text, label: text))
 

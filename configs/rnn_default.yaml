@@ -14,7 +14,8 @@ buffer_size: 10000
 bidirectional: True
 
 model_shapes:
-    vocab_size: 1000
+    vocab_size: 10000
+    sequence_length: 600
     embedding: 128
     lstm: 128
     dense: 64
