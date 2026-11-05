@@ -4,6 +4,7 @@ services:
     image: "ghcr.io/lblend/mann-eller-kvinne:latest"
     ports:
       - "5000:5000"
+    restart: unless-stopped
 
   frontend:
     container_name: mann-eller-kvinne-frontend
@@ -12,3 +13,4 @@ services:
       - "3000:3000"
     depends_on:
       - backend
+    restart: unless-stopped
