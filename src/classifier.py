@@ -1,6 +1,7 @@
 import pickle
 import os
 import warnings
+from pathlib import Path
 
 # SUPPRESS WARNINGS
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
@@ -8,6 +9,8 @@ warnings.filterwarnings('ignore')
 
 import tensorflow as tf  # noqa: E402
 from tensorflow import keras  # noqa: E402
+
+BIN_DIR = Path(__file__).parent / "bin"
 
 # Security note: Pickle files can execute arbitrary code when loaded.
 # These files should only be loaded from trusted sources and protected with
@@ -34,10 +37,10 @@ def safe_pickle_load(filepath: str):
 
 # Load models with safety checks
 try:
-    bayes_model = safe_pickle_load("src/bin/bayes_model_sk.pkl")
-    vectorizer = safe_pickle_load("src/bin/vectorizer.pkl")
+    bayes_model = safe_pickle_load(BIN_DIR / "bayes_model_sk.pkl")
+    vectorizer = safe_pickle_load(BIN_DIR / "vectorizer.pkl")
 
-    rnn_model = keras.models.load_model("src/bin/rnn.keras", safe_mode=True)
+    rnn_model = keras.models.load_model(BIN_DIR / "rnn.keras", safe_mode=True)
 except Exception as e:
     print(f"Error loading models: {e}")
     raise
