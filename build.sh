@@ -14,7 +14,7 @@ fi
 echo "Downloading NLTK stopwords and punctuation packages..."
 uv run python -c "import nltk; nltk.download('stopwords'); nltk.download('punkt')"
 
-if [ ! -e 'src/bin/bayes_model.pkl' ]; then
+if [ ! -e 'src/bin/bayes_model_sk.pkl' ] || [ ! -e 'src/bin/vectorizer.pkl' ]; then
     echo "Training Bayes model..."
     uv run python ./src/scripts/train_bayes.py
 fi
