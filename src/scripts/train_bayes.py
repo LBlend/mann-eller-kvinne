@@ -31,7 +31,8 @@ def _load_corpus() -> tuple[list[str] | np.ndarray]:
 
 
 def _save_model(model: MultinomialNB, path: str) -> None:
-    with open(path, "wb+") as f:
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "wb") as f:
         pickle.dump(model, f)
 
 
