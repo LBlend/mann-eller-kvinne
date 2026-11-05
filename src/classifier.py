@@ -1,4 +1,3 @@
-import numpy as np
 import pickle
 import os
 import warnings
@@ -7,6 +6,7 @@ import warnings
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 warnings.filterwarnings('ignore')
 
+import tensorflow as tf  # noqa: E402
 from tensorflow import keras  # noqa: E402
 
 # Security note: Pickle files can execute arbitrary code when loaded.
@@ -73,9 +73,7 @@ def predict_bayes(text: str) -> dict[str, float]:
 
 def predict_rnn(text: str) -> dict[str, float]:
     try:
-        # Suppress verbose output during prediction
-        pred_arr = rnn_model.predict(np.array([text]), verbose=0)
-        pred = float(pred_arr[0, 0])
+        pred = float(rnn_model(tf.constant([text]), training=False)[0, 0])
         # F = 0, M = 1, P(!A) == 1 - P(A)
         return {"male": pred, "female": 1 - pred}
     except Exception as e:
