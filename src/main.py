@@ -1,6 +1,6 @@
 from typing import Annotated, Literal
 
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, StringConstraints
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -56,20 +56,4 @@ def mann_eller_kvinne(payload: PredictionInput) -> dict[str, str | dict[str, flo
             male: float | estimated probability for the male class
             female: float | estimated probability for the female class
     """
-    try:
-        print("Received request with classifier:", payload.classifier)
-
-        response = classifier.predict(payload.text, payload.classifier)
-        print("Prediction completed successfully")
-        return response
-    except ValueError as e:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=str(e)
-        )
-    except Exception as e:
-        print(f"Error during prediction: {str(e)}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="An error occurred during prediction"
-        )
+    return classifier.predict(payload.text, payload.classifier)
