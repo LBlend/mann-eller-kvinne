@@ -47,8 +47,7 @@ Merk deg også at ved å bruke ferdigbyggede bilder for både frontend og backen
 
 0. Last ned repoet og installer avhengigheter
 
-- Python 3.10+
-- Pip
+- [uv](https://docs.astral.sh/uv/getting-started/installation/)
 
 1. Kjør installasjon- og treningssskriptet
 
@@ -56,11 +55,11 @@ Merk deg også at ved å bruke ferdigbyggede bilder for både frontend og backen
    sh build.sh
    ```
 
-_Merk deg at dette skriptet antar at PATH til python er satt til `python3`. Hvis dette ikke er tilfellet for deg, må du huske å endre skriptet eller PATHen din._
+_uv installerer riktig Python-versjon og alle avhengigheter automatisk._
 
 2. Kjør APIet
    ```
-   uvicorn src.main:app --host 0.0.0.0 --port 5000 --proxy-headers
+   uv run uvicorn src.main:app --host 0.0.0.0 --port 5000 --proxy-headers
    ```
 
 </details>

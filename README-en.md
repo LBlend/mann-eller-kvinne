@@ -46,17 +46,16 @@ Also note that by using our prebuilt images, you won't have the ability to chang
 
 0. Clone this repo and install the dependencies
 
-- Python 3.10+
-- Pip
+- [uv](https://docs.astral.sh/uv/getting-started/installation/)
 
 1. Run the build/installation script
    `sh build.sh`
 
-_Note that this script assumes that you have set `python3` as the PATH to your Python installation. If this isn't the case, you have to modify the script or change your path accordingly._
+_uv automatically installs the correct Python version and all dependencies._
 
 2. Run the API
    ```
-   uvicorn src.main:app --host 0.0.0.0 --port 5000 --proxy-headers
+   uv run uvicorn src.main:app --host 0.0.0.0 --port 5000 --proxy-headers
    ```
 
 </details>
