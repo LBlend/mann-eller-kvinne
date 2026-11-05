@@ -28,7 +28,8 @@ optimizer_args:
     learning_rate: 1e-3
 
 early_stopper:
-    patience: 2
+    patience: 3
+    restore_best_weights: True
     verbose: 1
 
 epochs: 50
