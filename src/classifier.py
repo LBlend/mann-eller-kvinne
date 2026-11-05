@@ -45,11 +45,8 @@ except Exception as e:
 
 def predict_bayes(text: str) -> dict[str, float]:
     features = vectorizer.transform([text])
-    probs = bayes_model.predict_proba(features)[0]
-    return {
-        "male": probs[1],
-        "female": probs[0],
-    }
+    probs = dict(zip(bayes_model.classes_, bayes_model.predict_proba(features)[0]))
+    return {"male": float(probs["M"]), "female": float(probs["F"])}
 
 
 def predict_rnn(text: str) -> dict[str, float]:
