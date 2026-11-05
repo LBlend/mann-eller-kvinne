@@ -1,5 +1,5 @@
-import pickle
 import os
+import pickle
 import warnings
 from pathlib import Path
 
@@ -12,38 +12,18 @@ from tensorflow import keras  # noqa: E402
 
 BIN_DIR = Path(__file__).parent / "bin"
 
-# Security note: Pickle files can execute arbitrary code when loaded.
-# These files should only be loaded from trusted sources and protected with
-# appropriate file permissions. In production, consider using safer serialization
-# formats like joblib or JSON + model-specific loaders.
 
+def _load_pickle(path: Path):
+    if path.stat().st_mode & 0o002:
+        raise PermissionError(f"Refusing to load world-writable file: {path}")
 
-def safe_pickle_load(filepath: str):
-    """
-    Load pickle file with basic safety checks.
-    WARNING: This is not completely secure against malicious pickle files.
-    """
-    if not os.path.exists(filepath):
-        raise FileNotFoundError(f"Model file not found: {filepath}")
-
-    # Check file permissions (should not be world-writable)
-    file_stat = os.stat(filepath)
-    if file_stat.st_mode & 0o002:  # Check if world-writable
-        raise PermissionError(f"Unsafe permissions on {filepath}")
-
-    with open(filepath, "rb") as f:
+    with path.open("rb") as f:
         return pickle.load(f)
 
 
-# Load models with safety checks
-try:
-    bayes_model = safe_pickle_load(BIN_DIR / "bayes_model_sk.pkl")
-    vectorizer = safe_pickle_load(BIN_DIR / "vectorizer.pkl")
-
-    rnn_model = keras.models.load_model(BIN_DIR / "rnn.keras", safe_mode=True)
-except Exception as e:
-    print(f"Error loading models: {e}")
-    raise
+bayes_model = _load_pickle(BIN_DIR / "bayes_model_sk.pkl")
+vectorizer = _load_pickle(BIN_DIR / "vectorizer.pkl")
+rnn_model = keras.models.load_model(BIN_DIR / "rnn.keras", safe_mode=True)
 
 
 def predict_bayes(text: str) -> dict[str, float]:
@@ -63,7 +43,6 @@ pred_funcs = {"bayes": predict_bayes, "rnn": predict_rnn}
 
 def predict(text: str, classifier: str = "bayes") -> dict[str, str | dict[str, float]]:
     if classifier not in pred_funcs:
-        raise ValueError(f"Unknown classifier: {classifier}. Must be one of {list(pred_funcs.keys())}")
+        raise ValueError(f"Unknown classifier: {classifier}. Must be one of {list(pred_funcs)}")
 
-    predict_proba = pred_funcs[classifier]
-    return {"text": text, "classifier": classifier, "probability": predict_proba(text)}
+    return {"text": text, "classifier": classifier, "probability": pred_funcs[classifier](text)}
