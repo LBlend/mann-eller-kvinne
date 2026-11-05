@@ -12,8 +12,8 @@ if [ ! -d 'corpus' ]; then
     uv run python ./src/scripts/clean_data.py
 fi
 
-echo "Downloading NLTK stopwords and punctuation packages..."
-uv run python -c "import nltk; nltk.download('stopwords'); nltk.download('punkt')"
+echo "Downloading NLTK stopwords..."
+uv run python -c "import nltk; nltk.download('stopwords')"
 
 if [ ! -e 'src/bin/bayes_model_sk.pkl' ] || [ ! -e 'src/bin/vectorizer.pkl' ]; then
     echo "Training Bayes model..."
