@@ -4,15 +4,16 @@ COPY --from=ghcr.io/astral-sh/uv:0.13 /uv /uvx /bin/
 
 ENV UV_COMPILE_BYTECODE=1 \
     UV_LINK_MODE=copy \
-    UV_PYTHON_DOWNLOADS=never
+    UV_PYTHON_DOWNLOADS=never \
+    UV_NO_DEV=1
 
 WORKDIR /code
 
-COPY . /code
+COPY pyproject.toml uv.lock .python-version ./
+RUN uv sync --frozen
 
-RUN chmod +x /code/build.sh
-
-RUN /code/build.sh
+COPY . .
+RUN sh build.sh
 
 RUN useradd --system --no-create-home app
 USER app
