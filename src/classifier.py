@@ -37,26 +37,7 @@ try:
     bayes_model = safe_pickle_load("src/bin/bayes_model_sk.pkl")
     vectorizer = safe_pickle_load("src/bin/vectorizer.pkl")
 
-    # Try loading Keras 3 format first, fallback to legacy format
-    rnn_model_path = "src/bin/rnn.keras"
-    if not os.path.exists(rnn_model_path):
-        # Fallback to old format directory (for backward compatibility)
-        rnn_model_path = "src/bin/rnn"
-
-    # Load with safe_mode=True to prevent arbitrary code execution
-    # Note: This only works with .keras files, not .h5/.hdf5
-    try:
-        rnn_model = keras.models.load_model(rnn_model_path, safe_mode=True)
-        print("RNN model loaded in safe mode")
-    except Exception as safe_mode_error:
-        print(f"Safe mode loading failed: {safe_mode_error}")
-        # Fallback to unsafe loading only for trusted local models
-        # In production, this should be removed or require explicit configuration
-        if os.path.basename(rnn_model_path) == "rnn.keras" or os.path.basename(rnn_model_path) == "rnn":
-            print("Loading model without safe_mode (trusted local model)")
-            rnn_model = keras.models.load_model(rnn_model_path, safe_mode=False)
-        else:
-            raise ValueError(f"Refusing to load untrusted model: {rnn_model_path}")
+    rnn_model = keras.models.load_model("src/bin/rnn.keras", safe_mode=True)
 except Exception as e:
     print(f"Error loading models: {e}")
     raise
