@@ -6,31 +6,31 @@ readme = "README-en.md"
 license = "GPL-3.0-only"
 requires-python = ">=3.12,<3.14"
 dependencies = [
-    "fastapi==0.135.*",
-    "pydantic==2.12.*",
-    "pydantic-settings==2.13.*",
-    "uvicorn[standard]==0.41.*",
-    "python-dotenv==1.2.*",
-    "tensorflow==2.20.*",
-    "keras==3.15.*",
-    "scikit-learn==1.8.*",
-    "numpy==2.4.*",
-    "scipy==1.17.*",
-    "joblib==1.5.*",
-    "nltk==3.10.*",
-    "pyyaml==6.0.*",
-    "requests==2.34.*",
-    "certifi==2026.2.25",
-    "charset-normalizer==3.4.*",
-    "urllib3==2.7.*",
-    "click==8.3.*",
-    "tqdm==4.67.*",
-    "h5py==3.15.*",
+    "fastapi>=0.162.0",
+    "pydantic>=2.14.3",
+    "pydantic-settings>=2.16.2",
+    "uvicorn[standard]>=0.54.0",
+    "python-dotenv>=1.2.4",
+    "tensorflow>=2.21.0",
+    "tensorboard>=2.21.0",
+    "keras>=3.15.1",
+    "scikit-learn>=1.9.1",
+    "numpy>=2.5.4",
+    "scipy>=1.18.1",
+    "joblib>=1.6.0",
+    "nltk>=3.10.4",
+    "pyyaml>=6.0.3",
+    "requests>=2.34.2",
+    "certifi>=2026.10.23",
+    "charset-normalizer>=3.5.2",
+    "urllib3>=2.8.0",
+    "click>=8.5.0",
+    "tqdm>=4.70.1",
 ]
 
 [dependency-groups]
 dev = [
-    "flake8",
+    "flake8>=7.5.0",
 ]
 
 [tool.uv]
