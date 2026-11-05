@@ -118,7 +118,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     with open(f"configs/{args.config}") as f:
-        config = yaml.load(f, Loader=yaml.FullLoader)
+        config = yaml.safe_load(f)
 
     # Allows use of scientific notation
     config["optimizer_args"]["learning_rate"] = float(config["optimizer_args"]["learning_rate"])
