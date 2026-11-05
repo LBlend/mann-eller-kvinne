@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - "src/**"
+      - "pyproject.toml"
+      - "uv.lock"
 
 permissions:
   contents: read
