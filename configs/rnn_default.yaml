@@ -25,7 +25,7 @@ model_shapes:
 optimizer_type: "Adam"
 
 optimizer_args:
-    learning_rate: 1e-4
+    learning_rate: 1e-3
 
 early_stopper:
     patience: 2
