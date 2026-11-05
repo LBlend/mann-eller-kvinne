@@ -8,7 +8,6 @@ logs/
 # Backend
 __pycache__/
 .venv/
-bayes_model.pkl
 corpus/
 
 # misc
