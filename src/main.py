@@ -1,18 +1,24 @@
-from . import classifier
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, field_validator
-import os
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
+from . import classifier
+
+
+class Settings(BaseSettings):
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+
+    allowed_origins: str = "http://localhost:3000,http://localhost"
+
+
+settings = Settings()
 
 app = FastAPI()
 
-# CORS configuration with environment variable support
-ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://localhost").split(",")
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
+    allow_origins=settings.allowed_origins.split(","),
     allow_credentials=False,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
