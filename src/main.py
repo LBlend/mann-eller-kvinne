@@ -1,6 +1,8 @@
+from typing import Annotated, Literal
+
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, StringConstraints
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from . import classifier
@@ -31,20 +33,8 @@ app.add_middleware(
 
 
 class PredictionInput(BaseModel):
-    text: str = Field(..., min_length=1, max_length=10000, description="Text to classify")
-    classifier: str = Field(default="bayes", pattern="^(bayes|rnn)$", description="Classifier to use")
-
-    @field_validator('text')
-    @classmethod
-    def validate_text(cls, v: str) -> str:
-        # Strip whitespace
-        v = v.strip()
-        if not v:
-            raise ValueError("Text cannot be empty or only whitespace")
-        # Check for reasonable length
-        if len(v) > 10000:
-            raise ValueError("Text is too long (max 10000 characters)")
-        return v
+    text: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=10000)]
+    classifier: Literal["bayes", "rnn"] = "bayes"
 
 
 @app.get("/")
@@ -68,13 +58,6 @@ def mann_eller_kvinne(payload: PredictionInput) -> dict[str, str | dict[str, flo
     """
     try:
         print("Received request with classifier:", payload.classifier)
-
-        # Validate classifier exists
-        if payload.classifier not in ["bayes", "rnn"]:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Invalid classifier. Must be 'bayes' or 'rnn'"
-            )
 
         response = classifier.predict(payload.text, payload.classifier)
         print("Prediction completed successfully")
