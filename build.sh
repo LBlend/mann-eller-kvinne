@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 echo "Installing Python dependencies..."
 uv sync --frozen
