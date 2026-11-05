@@ -74,8 +74,7 @@ def get_train_callbacks(config: dict):
 
     early_stopper_args = config.get("early_stopper")
     if early_stopper_args:
-        early_stopper = (tf.keras.callbacks.EarlyStopping(**early_stopper_args),)
-        train_callbacks.append(early_stopper)
+        train_callbacks.append(tf.keras.callbacks.EarlyStopping(**early_stopper_args))
 
     if config.get("log_folder"):
         log_path = f'logs/{config["log_folder"]}/'
