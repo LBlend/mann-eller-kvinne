@@ -17,7 +17,7 @@ def read_file(path: str) -> str:
         return f.read()
 
 
-def _load_corpus() -> tuple[list[str] | np.ndarray]:
+def _load_corpus() -> tuple[list[str], np.ndarray]:
     dir_f = "corpus/data/train/F/"
     dir_m = "corpus/data/train/M/"
     files_f = [dir_f + i for i in os.listdir(dir_f)]
@@ -30,7 +30,7 @@ def _load_corpus() -> tuple[list[str] | np.ndarray]:
     return raw_data, labels
 
 
-def _save_model(model: MultinomialNB, path: str) -> None:
+def _save_model(model: MultinomialNB | CountVectorizer, path: str) -> None:
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "wb") as f:
         pickle.dump(model, f)

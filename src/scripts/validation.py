@@ -1,5 +1,7 @@
 import pickle
+from collections.abc import Callable, Iterator
 
+import numpy as np
 import tensorflow as tf
 from sklearn.metrics import classification_report
 from tensorflow import keras
@@ -10,18 +12,18 @@ TEST_DIR = "corpus/data/test"
 BATCH_SIZE = 10000
 
 
-def get_dev_test():  # TODO: typing
+def get_dev_test() -> Iterator[tuple[tf.Tensor, tf.Tensor]]:
     for directory in DEV_DIR, TEST_DIR:
         data = keras.utils.text_dataset_from_directory(directory, batch_size=BATCH_SIZE, shuffle=False)
         yield next(iter(data))
 
 
-def get_predict_rnn(model_path: str) -> callable:  # TODO: typing
+def get_predict_rnn(model_path: str) -> Callable[[np.ndarray], np.ndarray]:
     rnn_model = keras.models.load_model(model_path, safe_mode=True)
     return lambda x: (rnn_model(tf.constant(x), training=False) > 0.5).numpy().astype(int).squeeze()
 
 
-def get_predict_bayes() -> list[int]:
+def get_predict_bayes() -> Callable[[np.ndarray], list[int]]:
     model_path = "src/bin/bayes_model_sk.pkl"
     vectorizer_path = "src/bin/vectorizer.pkl"
 
@@ -31,9 +33,8 @@ def get_predict_bayes() -> list[int]:
     with open(vectorizer_path, "rb") as f:
         vectorizer = pickle.load(f)
 
-    def predict_on_str(text: str) -> int:
-        text = text.decode("UTF8")
-        features = vectorizer.transform([text])
+    def predict_on_str(text: bytes) -> int:
+        features = vectorizer.transform([text.decode("utf-8")])
         pred = bayes_model.predict(features)
         return 0 if pred[0] == "F" else 1
 
