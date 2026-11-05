@@ -13,9 +13,8 @@ np.random.seed(42)
 
 
 def read_file(path: str) -> str:
-    with open(path) as f:
-        content = f.read()
-    return content
+    with open(path, encoding="utf-8") as f:
+        return f.read()
 
 
 def _load_corpus() -> tuple[list[str] | np.ndarray]:
