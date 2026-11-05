@@ -19,7 +19,7 @@ def load_datasets(batch_size: int) -> tuple[tf.data.Dataset, tf.data.Dataset]:
     return train, dev
 
 
-def get_optimizer(name: str, optimizer_args: dict = {}):
+def get_optimizer(name: str, optimizer_args: dict | None = None):
     options = {
         "Adam": tf.keras.optimizers.Adam,
         "RMSProp": tf.keras.optimizers.RMSprop,
@@ -29,9 +29,9 @@ def get_optimizer(name: str, optimizer_args: dict = {}):
     constructor = options.get(name)
 
     if not constructor:
-        raise TypeError(f"Invalid optimizer: {name}")
-    else:
-        return constructor(**optimizer_args)
+        raise ValueError(f"Invalid optimizer: {name}")
+
+    return constructor(**(optimizer_args or {}))
 
 
 def get_model(train_set: tf.data.Dataset, config: dict) -> tf.keras.Model:
