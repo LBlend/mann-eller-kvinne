@@ -1,4 +1,3 @@
-# from collections import Counter
 import json
 import os
 import shutil
@@ -20,7 +19,6 @@ def main() -> None:
         gender, *_ = genders = content["gender_critics"]
 
         if len(genders) > 1:
-            # gender, = Counter(genders).most_common(1)[0]
             gender = "MULTI_AUTHOR"
 
         split = content["split"]
