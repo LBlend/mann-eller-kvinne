@@ -49,6 +49,8 @@ def get_model(train_set: tf.data.Dataset, config: dict) -> tf.keras.Model:
     if config["bidirectional"]:
         lstm = tf.keras.layers.Bidirectional(lstm)
 
+    dropout = config.get("dropout", {})
+
     model = tf.keras.Sequential(
         [
             encoder,
@@ -57,8 +59,11 @@ def get_model(train_set: tf.data.Dataset, config: dict) -> tf.keras.Model:
                 output_dim=shapes["embedding"],
                 mask_zero=True,
             ),
+            tf.keras.layers.SpatialDropout1D(dropout.get("embedding", 0.0)),
             lstm,
+            tf.keras.layers.Dropout(dropout.get("dense", 0.0)),
             tf.keras.layers.Dense(shapes["dense"], activation="relu"),
+            tf.keras.layers.Dropout(dropout.get("dense", 0.0)),
             tf.keras.layers.Dense(1, activation="sigmoid"),
         ]
     )

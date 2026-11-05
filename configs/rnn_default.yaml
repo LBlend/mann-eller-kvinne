@@ -22,6 +22,9 @@ model_shapes:
     # Output layer is constant
     # output: 1
 
+dropout:
+    embedding: 0.2
+    dense: 0.4
 
 optimizer_type: "Adam"
 
