@@ -37,13 +37,24 @@ class PredictionInput(BaseModel):
     classifier: Literal["bayes", "rnn"] = "bayes"
 
 
+class Probability(BaseModel):
+    male: float
+    female: float
+
+
+class PredictionOutput(BaseModel):
+    text: str
+    classifier: Literal["bayes", "rnn"]
+    probability: Probability
+
+
 @app.get("/")
 def home() -> str:
     return "API goes BRRRRRRRRRRR\nYeet"
 
 
 @app.post("/mann-eller-kvinne")
-def mann_eller_kvinne(payload: PredictionInput) -> dict[str, str | dict[str, float]]:
+def mann_eller_kvinne(payload: PredictionInput) -> PredictionOutput:
     """
     Input fields:
         text: str | input data for classifier (1-10000 characters)
@@ -56,4 +67,4 @@ def mann_eller_kvinne(payload: PredictionInput) -> dict[str, str | dict[str, flo
             male: float | estimated probability for the male class
             female: float | estimated probability for the female class
     """
-    return classifier.predict(payload.text, payload.classifier)
+    return PredictionOutput.model_validate(classifier.predict(payload.text, payload.classifier))
