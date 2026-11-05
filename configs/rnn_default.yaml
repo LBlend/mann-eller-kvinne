@@ -17,7 +17,7 @@ model_shapes:
     vocab_size: 10000
     sequence_length: 600
     embedding: 128
-    lstm: 128
+    lstm: 64
     dense: 64
     # Output layer is constant
     # output: 1
