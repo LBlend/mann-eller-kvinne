@@ -44,7 +44,7 @@ def get_model(train_set: tf.data.Dataset, config: dict) -> tf.keras.Model:
 
     encoder.adapt(train_set.map(lambda text, label: text))
 
-    lstm = tf.keras.layers.LSTM(shapes["lstm"])
+    lstm = tf.keras.layers.LSTM(shapes["lstm"], return_sequences=True)
 
     if config["bidirectional"]:
         lstm = tf.keras.layers.Bidirectional(lstm)
@@ -61,6 +61,7 @@ def get_model(train_set: tf.data.Dataset, config: dict) -> tf.keras.Model:
             ),
             tf.keras.layers.SpatialDropout1D(dropout.get("embedding", 0.0)),
             lstm,
+            tf.keras.layers.GlobalAveragePooling1D(),
             tf.keras.layers.Dropout(dropout.get("dense", 0.0)),
             tf.keras.layers.Dense(shapes["dense"], activation="relu"),
             tf.keras.layers.Dropout(dropout.get("dense", 0.0)),
