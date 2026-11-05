@@ -1,11 +1,8 @@
 import os
 import pickle
-import warnings
 from pathlib import Path
 
-# SUPPRESS WARNINGS
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
-warnings.filterwarnings('ignore')
+os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "2")
 
 import tensorflow as tf  # noqa: E402
 from tensorflow import keras  # noqa: E402
