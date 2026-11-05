@@ -11,6 +11,10 @@ class Settings(BaseSettings):
 
     allowed_origins: str = "http://localhost:3000,http://localhost"
 
+    @property
+    def origins(self) -> list[str]:
+        return [origin.strip() for origin in self.allowed_origins.split(",") if origin.strip()]
+
 
 settings = Settings()
 
@@ -18,7 +22,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.allowed_origins.split(","),
+    allow_origins=settings.origins,
     allow_credentials=False,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
