@@ -72,15 +72,9 @@ def predict_bayes(text: str) -> dict[str, float]:
 
 
 def predict_rnn(text: str) -> dict[str, float]:
-    try:
-        pred = float(rnn_model(tf.constant([text]), training=False)[0, 0])
-        # F = 0, M = 1, P(!A) == 1 - P(A)
-        return {"male": pred, "female": 1 - pred}
-    except Exception as e:
-        print(f"RNN prediction error: {e}")
-        # Fallback to Bayes if RNN fails (compatibility issue)
-        print("Falling back to Bayes classifier")
-        return predict_bayes(text)
+    pred = float(rnn_model(tf.constant([text]), training=False)[0, 0])
+    # F = 0, M = 1, P(!A) == 1 - P(A)
+    return {"male": pred, "female": 1 - pred}
 
 
 pred_funcs = {"bayes": predict_bayes, "rnn": predict_rnn}
