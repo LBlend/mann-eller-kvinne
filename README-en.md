@@ -60,7 +60,7 @@ _uv automatically installs the correct Python version and all dependencies._
 
 </details>
 
-_In addition to these options you have the option to use the [docker-compose](docker-compose.yml) file included in this repo to run both the frontend and the backend through Docker. Note however that this option may limit your ability to configure your images to your desire. See the frontend repo for more information._
+_In addition to these options you have the option to use the [docker-compose](docker-compose.yml) file included in this repo to run both the frontend and the backend through Docker. To configure them, copy [.env.example](.env.example) to `.env` next to `docker-compose.yml` and set `ALLOWED_ORIGINS` to the frontend's address and `VITE_API_URL` to the backend's address. Without a `.env` file, both run on `localhost`._
 
 ## Thank you
 

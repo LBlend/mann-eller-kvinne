@@ -64,7 +64,7 @@ _uv installerer riktig Python-versjon og alle avhengigheter automatisk._
 
 </details>
 
-_Det ligger også en [docker-compose](docker-compose.yml) fil i dette repoet som vil sette opp både backend og frontend gjennom Docker. Merk deg derimot at bruk av denne metoden kan sette restriksjoner på konfigurasjonen din. Se frontendrepoet for mer info._
+_Det ligger også en [docker-compose](docker-compose.yml) fil i dette repoet som vil sette opp både backend og frontend gjennom Docker. For å konfigurere dem kopierer du [.env.example](.env.example) til `.env` ved siden av `docker-compose.yml`, og setter `ALLOWED_ORIGINS` til adressen til frontenden og `VITE_API_URL` til adressen til backenden. Uten en `.env`-fil kjører begge på `localhost`._
 
 ## Takk
 
