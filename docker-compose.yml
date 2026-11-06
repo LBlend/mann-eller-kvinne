@@ -2,6 +2,8 @@ services:
   backend:
     container_name: mann-eller-kvinne-backend
     image: "ghcr.io/lblend/mann-eller-kvinne:latest"
+    environment:
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:3000,http://localhost}
     ports:
       - "5000:5000"
     restart: unless-stopped
@@ -9,6 +11,8 @@ services:
   frontend:
     container_name: mann-eller-kvinne-frontend
     image: "ghcr.io/lblend/mann-eller-kvinne-frontend:latest"
+    environment:
+      VITE_API_URL: ${VITE_API_URL:-http://localhost:5000/mann-eller-kvinne}
     ports:
       - "3000:3000"
     depends_on:
