@@ -1,6 +1,6 @@
 [project]
 name = "mann-eller-kvinne"
-version = "4.1.0"
+version = "4.2.0"
 description = "A website that guesses whether you're a man or a woman based on what you type"
 readme = "README-en.md"
 license = "GPL-3.0-only"
