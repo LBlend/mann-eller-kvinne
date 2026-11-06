@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.2.0](https://github.com/LBlend/mann-eller-kvinne/compare/4.1.0...4.2.0) (2026-11-06)
+
+
+### Features
+
+* configure both services from a .env file ([7332a65](https://github.com/LBlend/mann-eller-kvinne/commit/7332a652ee70c71dbffed334293fa3be2d33cc56))
+
+
+### Documentation
+
+* explain configuring docker compose with a .env file ([c0e848e](https://github.com/LBlend/mann-eller-kvinne/commit/c0e848e1896966f4386f5b40d012cfbfa2a9a14b))
+
 ## [4.1.0](https://github.com/LBlend/mann-eller-kvinne/compare/4.0.0...4.1.0) (2026-11-05)
 
 
